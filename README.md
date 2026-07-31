@@ -158,6 +158,12 @@ Projeto em desenvolvimento.
 
 Versão atual: beta demonstrativa.
 
-## Autor
+---
 
-Desenvolvido por Julio como projeto de TCC.
+## Autores
+
+- [Julio Aparecido](https://github.com/JuuJap)
+- [Julio Cesar](https://github.com/CesarNSR)
+- [Matheus Bassi](https://github.com/Bassi1711)
+
+---
