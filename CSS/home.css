@@ -772,7 +772,7 @@ body.dark-mode .topbar {
 
 .quick-actions {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 13px;
 }
 
@@ -839,107 +839,6 @@ body.dark-mode .topbar {
 .quick-action small {
     color: var(--text-secondary);
     font-size: 11px;
-}
-
-
-/* =========================================================
-   ESTOQUE
-========================================================= */
-
-.alert-counter {
-    padding: 6px 9px;
-
-    color: var(--danger);
-    background: var(--danger-soft);
-
-    border-radius: 999px;
-
-    font-size: 11px;
-    font-weight: 800;
-    white-space: nowrap;
-}
-
-.stock-list {
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
-}
-
-.stock-item {
-    padding: 11px;
-
-    display: flex;
-    align-items: center;
-    gap: 11px;
-
-    background: var(--surface-soft);
-    border: 1px solid var(--border);
-    border-radius: 13px;
-}
-
-.stock-item[hidden] {
-    display: none;
-}
-
-.product-avatar {
-    width: 39px;
-    height: 39px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    color: var(--primary);
-    background: var(--primary-soft);
-
-    border-radius: 11px;
-
-    font-size: 11px;
-    font-weight: 800;
-}
-
-.stock-info {
-    min-width: 0;
-
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.stock-info strong {
-    overflow: hidden;
-
-    font-size: 12px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.stock-info span {
-    color: var(--text-secondary);
-    font-size: 10px;
-}
-
-.stock-quantity {
-    padding: 5px 7px;
-
-    border-radius: 8px;
-
-    font-size: 10px;
-    font-weight: 800;
-    white-space: nowrap;
-}
-
-.stock-quantity.danger {
-    color: var(--warning);
-    background: var(--warning-soft);
-}
-
-.stock-quantity.critical {
-    color: var(--danger);
-    background: var(--danger-soft);
 }
 
 
@@ -1408,6 +1307,10 @@ body.dark-mode .topbar {
 
     .dashboard-grid {
         grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .activity-panel {
