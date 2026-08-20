@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Gerenciamento demonstrativo de pedidos da Velas S. Tomé"
+    >
+
+    <title>
+        Velas S. Tomé | Pedidos
+    </title>
+
+    <link
+        rel="icon"
+        href="img/Logo1.png"
+        type="image/png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/home.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/pedidos.css"
+    >
+
+    <script src="js/common.js?v=1" defer></script>
+
+    <script
+        src="js/pedidos.js?v=2"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <app-sidebar active="pedidos"></app-sidebar>
+
+    <div class="main-shell">
+
+        <app-topbar search-id="orderSearch" search-class="order-search-box" placeholder="Buscar pedido..." search-label="Buscar pedidos"></app-topbar>
+
+        <main class="content orders-content">
+
+            <section class="page-heading orders-heading">
+                <div>
+                    <span class="demo-badge">Dados temporários</span>
+                    <h1>Pedidos</h1>
+                    <p>Monte, salve e acompanhe os pedidos realizados pela empresa.</p>
+                </div>
+
+                <div class="order-number-heading">
+                    <span>Próximo pedido</span>
+                    <strong id="nextOrderNumber">#0001</strong>
+                </div>
+            </section>
+
+            <section class="panel order-data-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>1. Dados do pedido</h2>
+                        <p>Informe o cliente e o local de entrega.</p>
+                    </div>
+                </div>
+
+                <div class="order-data-grid">
+                    <div class="form-group">
+                        <label for="orderClient">Cliente *</label>
+                        <input id="orderClient" type="text" list="clientOptions" placeholder="Digite ou selecione um cliente" maxlength="120" autocomplete="off">
+                        <datalist id="clientOptions"></datalist>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderDate">Data</label>
+                        <input id="orderDate" type="text" readonly>
+                    </div>
+
+                    <div class="form-group full-column">
+                        <label for="orderAddress">Endereço / local de entrega *</label>
+                        <input id="orderAddress" type="text" placeholder="Exemplo: Rua São Tomé, 123" maxlength="180" autocomplete="street-address">
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel order-item-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>2. Adicionar item</h2>
+                        <p>Adicione um ou mais produtos ao pedido.</p>
+                    </div>
+                </div>
+
+                <form id="orderItemForm">
+                    <div class="order-item-grid">
+                        <div class="form-group product-field">
+                            <label for="itemDescription">Produto / descrição *</label>
+                            <input id="itemDescription" type="text" list="productOptions" placeholder="Exemplo: Vela Aromática de Lavanda" maxlength="140" autocomplete="off">
+                            <datalist id="productOptions"></datalist>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="itemQuantity">Quantidade *</label>
+                            <input id="itemQuantity" type="number" min="1" step="1" value="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="itemUnitValue">Valor unitário *</label>
+                            <input id="itemUnitValue" type="text" inputmode="decimal" placeholder="Exemplo: 25,00" autocomplete="off">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="itemUnitWeight">Peso unitário (g) *</label>
+                            <input id="itemUnitWeight" type="text" inputmode="decimal" placeholder="Exemplo: 250,5" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="item-calculation-preview">
+                        <div>
+                            <span>Valor total do item</span>
+                            <strong id="itemTotalPreview">R$ 0,00</strong>
+                        </div>
+                        <div>
+                            <span>Peso total do item</span>
+                            <strong id="itemWeightPreview">0 g</strong>
+                        </div>
+                    </div>
+
+                    <div class="order-item-actions">
+                        <button class="secondary-button" id="cancelItemEditButton" type="button" hidden>Cancelar edição</button>
+                        <button class="primary-button" id="addItemButton" type="submit"><span aria-hidden="true">+</span> Adicionar item</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="panel draft-items-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Itens adicionados</h2>
+                        <p>Confira os produtos antes de salvar.</p>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="activity-table draft-items-table">
+                        <thead>
+                            <tr>
+                                <th>Qtd.</th>
+                                <th>Descrição</th>
+                                <th>Unitário</th>
+                                <th>Total</th>
+                                <th>Peso</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="draftItemsBody"></tbody>
+                    </table>
+
+                    <div class="orders-empty-state" id="draftItemsEmpty">
+                        <strong>Nenhum item adicionado</strong>
+                        <p>Utilize o formulário acima para montar o pedido.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel ticket-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>3. Talão digital</h2>
+                        <p>Prévia do documento que será salvo ou impresso.</p>
+                    </div>
+                </div>
+
+                <article class="order-ticket" id="orderTicket">
+                    <div class="ticket-header">
+                        <div class="ticket-brand">
+                            <img src="img/Logo1.png" alt="">
+                            <div>
+                                <strong>VELAS S. TOMÉ</strong>
+                                <span>Pedido</span>
+                            </div>
+                        </div>
+
+                        <div class="ticket-number">
+                            <span>PEDIDO Nº</span>
+                            <strong id="ticketOrderNumber">0001</strong>
+                        </div>
+                    </div>
+
+                    <div class="ticket-client-data">
+                        <p><strong>Cliente:</strong> <span id="ticketClient">Não informado</span></p>
+                        <p><strong>Endereço:</strong> <span id="ticketAddress">Não informado</span></p>
+                        <p><strong>Data:</strong> <span id="ticketDate">--</span></p>
+                    </div>
+
+                    <div class="ticket-table-wrapper">
+                        <table class="ticket-table">
+                            <thead>
+                                <tr>
+                                    <th>Qtd.</th>
+                                    <th>Descrição</th>
+                                    <th>Unitário</th>
+                                    <th>Total</th>
+                                    <th>Peso</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ticketItemsBody">
+                                <tr class="ticket-empty-row"><td colspan="5">Nenhum item adicionado.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="ticket-summary">
+                        <div>
+                            <span>Peso total</span>
+                            <strong id="ticketTotalWeight">0 g</strong>
+                        </div>
+                        <div>
+                            <span>Valor total</span>
+                            <strong id="ticketTotalValue">R$ 0,00</strong>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="ticket-actions">
+                    <button class="primary-button" id="saveOrderButton" type="button">Salvar pedido</button>
+                    <button class="secondary-button" id="downloadOrderButton" type="button">Baixar pedido</button>
+                    <button class="secondary-button" id="printOrderButton" type="button">Imprimir pedido</button>
+                </div>
+            </section>
+
+            <section class="panel orders-history-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>4. Pedidos salvos</h2>
+                        <p>Pedidos registrados durante esta sessão.</p>
+                    </div>
+                </div>
+
+                <div class="table-wrapper orders-history-wrapper">
+                    <table class="activity-table orders-history-table">
+                        <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Cliente</th>
+                                <th>Itens</th>
+                                <th>Total</th>
+                                <th>Data</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersHistoryBody"></tbody>
+                    </table>
+
+                    <div class="orders-empty-state" id="ordersHistoryEmpty">
+                        <strong>Nenhum pedido salvo</strong>
+                        <p>Os pedidos registrados aparecerão aqui.</p>
+                    </div>
+                </div>
+
+                <div class="orders-table-footer">
+                    <span id="ordersCounter">0 pedidos registrados</span>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+
+<div class="modal" id="viewOrderModal" hidden aria-hidden="true">
+    <button class="modal-backdrop" id="viewOrderBackdrop" type="button" aria-label="Fechar"></button>
+    <section class="modal-dialog order-view-dialog" role="dialog" aria-modal="true" aria-labelledby="viewOrderTitle">
+        <div class="modal-header">
+            <div>
+                <span class="demo-badge">Pedido salvo</span>
+                <h2 id="viewOrderTitle">Pedido</h2>
+            </div>
+            <button class="modal-close" id="closeViewOrderButton" type="button" aria-label="Fechar">×</button>
+        </div>
+        <div id="viewOrderContent"></div>
+    </section>
+</div>
+
+<app-toast></app-toast>
+
+<noscript>
+    <div class="noscript-message">Ative o JavaScript para utilizar o gerenciamento de pedidos.</div>
+</noscript>
+
+</body>
+</html>

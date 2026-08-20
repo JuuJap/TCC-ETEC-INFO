@@ -1,0 +1,377 @@
+/* =========================================================
+   PÁGINA FINANCEIRO
+   Complementa o home.css
+========================================================= */
+
+.finance-content {
+    padding-bottom: 45px;
+}
+
+.finance-heading {
+    align-items: center;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.financial-stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.financial-stat-card strong {
+    font-size: clamp(24px, 2.4vw, 34px);
+}
+
+.financial-stat-card:nth-child(2) .stat-icon {
+    font-size: 24px;
+}
+
+.financial-stat-card:nth-child(3) .stat-icon {
+    font-size: 27px;
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+
+.finance-register-panel {
+    margin-bottom: 22px;
+}
+
+.finance-form-grid {
+    display: grid;
+    grid-template-columns:
+        minmax(150px, 0.7fr)
+        minmax(240px, 1.7fr)
+        minmax(170px, 0.85fr)
+        minmax(170px, 0.85fr);
+    gap: 18px;
+}
+
+.finance-register-panel input,
+.finance-select {
+    width: 100%;
+}
+
+.finance-select {
+    min-height: 46px;
+    padding: 0 13px;
+
+    color: var(--text-primary);
+    background: var(--surface-soft);
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    font: inherit;
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.finance-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.finance-form-actions {
+    margin-top: 8px;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+.register-finance-button {
+    min-height: 46px;
+    padding-inline: 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+}
+
+.register-finance-button span {
+    font-size: 19px;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   HISTÓRICO
+========================================================= */
+
+.finance-history-panel {
+    padding-bottom: 0;
+    overflow: hidden;
+}
+
+.finance-table-wrapper {
+    margin-inline: -22px;
+    overflow-x: auto;
+}
+
+.finance-table {
+    min-width: 900px;
+}
+
+.finance-table th:first-child,
+.finance-table td:first-child {
+    padding-left: 22px;
+}
+
+.finance-table th:last-child,
+.finance-table td:last-child {
+    padding-right: 22px;
+}
+
+.finance-description {
+    min-width: 260px;
+
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.finance-type {
+    min-width: 105px;
+}
+
+.finance-value {
+    min-width: 135px;
+
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.finance-date {
+    min-width: 185px;
+
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.finance-type-badge {
+    width: fit-content;
+    padding: 6px 10px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+.finance-type-badge.income {
+    color: #34714b;
+    background: rgba(72, 152, 98, 0.14);
+}
+
+.finance-type-badge.expense {
+    color: #9a4f3f;
+    background: rgba(180, 91, 70, 0.14);
+}
+
+body.dark-mode .finance-type-badge.income {
+    color: #9bd6ac;
+    background: rgba(105, 190, 129, 0.14);
+}
+
+body.dark-mode .finance-type-badge.expense {
+    color: #e1a292;
+    background: rgba(202, 112, 91, 0.14);
+}
+
+.finance-value.income {
+    color: #34714b;
+}
+
+.finance-value.expense {
+    color: #a85442;
+}
+
+body.dark-mode .finance-value.income {
+    color: #9bd6ac;
+}
+
+body.dark-mode .finance-value.expense {
+    color: #e1a292;
+}
+
+
+/* =========================================================
+   SEM RESULTADOS
+========================================================= */
+
+.finance-empty-state {
+    padding: 55px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.finance-empty-state[hidden] {
+    display: none;
+}
+
+.finance-empty-state .empty-icon {
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--primary);
+    background: var(--primary-soft);
+
+    border-radius: 15px;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.finance-empty-state strong {
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.finance-empty-state p {
+    max-width: 430px;
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+.finance-table-footer {
+    min-height: 52px;
+
+    margin-inline: -22px;
+    padding: 14px 22px;
+
+    display: flex;
+    align-items: center;
+
+    color: var(--text-secondary);
+    background: var(--surface-soft);
+
+    border-top: 1px solid var(--border);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PESQUISA
+========================================================= */
+
+.finance-search-box {
+    width: min(620px, 100%);
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .financial-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .finance-form-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .finance-description-field {
+        grid-column: span 2;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .financial-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .finance-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .finance-description-field {
+        grid-column: auto;
+    }
+
+    .finance-form-actions {
+        justify-content: stretch;
+    }
+
+    .register-finance-button {
+        width: 100%;
+    }
+
+    .finance-table-wrapper {
+        margin-inline: -18px;
+    }
+
+    .finance-table th:first-child,
+    .finance-table td:first-child {
+        padding-left: 18px;
+    }
+
+    .finance-table th:last-child,
+    .finance-table td:last-child {
+        padding-right: 18px;
+    }
+
+    .finance-table-footer {
+        margin-inline: -18px;
+        padding-inline: 18px;
+    }
+
+}
+
+
+.finance-weight {
+    min-width: 120px;
+    color: var(--text-secondary);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.financial-stat-card:nth-child(4) .stat-icon {
+    font-size: 18px;
+}

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Controle geral demonstrativo da Velas S. Tomé"
+    >
+
+    <title>Velas S. Tomé | Controle Geral</title>
+
+    <link
+        rel="icon"
+        href="img/Logo1.png"
+        type="image/png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/home.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/financeiro.css"
+    >
+
+    <script src="js/common.js?v=1" defer></script>
+
+    <script
+        src="js/financeiro.js?v=3"
+        defer
+    ></script>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- =====================================================
+             MENU LATERAL
+        ====================================================== -->
+
+        <app-sidebar active="controle"></app-sidebar>
+
+
+        <!-- =====================================================
+             ÁREA PRINCIPAL
+        ====================================================== -->
+
+        <div class="main-shell">
+
+            <app-topbar search-id="financeSearch" search-class="finance-search-box" placeholder="Buscar movimentação..." search-label="Buscar movimentações do controle geral"></app-topbar>
+
+
+            <main class="content finance-content">
+
+                <!-- CABEÇALHO -->
+                <section class="page-heading finance-heading">
+
+                    <div>
+
+                        <span class="demo-badge">
+                            Dados temporários
+                        </span>
+
+                        <h1>
+                            Controle Geral
+                        </h1>
+
+                        <p>
+                            Acompanhe valores, pesos, entradas, saídas e
+                            movimentações gerais da empresa durante esta sessão.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- RESUMO -->
+                <section
+                    class="stats-grid financial-stats-grid"
+                    aria-label="Resumo do controle geral"
+                >
+
+                    <article class="stat-card financial-stat-card">
+
+                        <div class="stat-card-header">
+                            <div class="stat-icon">R$</div>
+                        </div>
+
+                        <p>Saldo atual</p>
+
+                        <strong id="currentBalance">
+                            R$ 0,00
+                        </strong>
+
+                        <small>
+                            Entradas menos saídas
+                        </small>
+
+                    </article>
+
+
+                    <article class="stat-card financial-stat-card">
+
+                        <div class="stat-card-header">
+                            <div class="stat-icon">+</div>
+                        </div>
+
+                        <p>Total de entradas</p>
+
+                        <strong id="totalIncome">
+                            R$ 0,00
+                        </strong>
+
+                        <small>
+                            Inclui vendas registradas
+                        </small>
+
+                    </article>
+
+
+                    <article class="stat-card financial-stat-card">
+
+                        <div class="stat-card-header">
+                            <div class="stat-icon">−</div>
+                        </div>
+
+                        <p>Total de saídas</p>
+
+                        <strong id="totalExpenses">
+                            R$ 0,00
+                        </strong>
+
+                        <small>
+                            Despesas registradas
+                        </small>
+
+                    </article>
+
+
+                    <article class="stat-card financial-stat-card">
+
+                        <div class="stat-card-header">
+                            <div class="stat-icon">g</div>
+                        </div>
+
+                        <p>Peso total registrado</p>
+
+                        <strong id="totalWeight">
+                            0 g
+                        </strong>
+
+                        <small>
+                            Soma dos pesos das movimentações
+                        </small>
+
+                    </article>
+
+                </section>
+
+
+                <!-- REGISTRAR MOVIMENTAÇÃO -->
+                <section class="panel finance-register-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Registrar movimentação
+                            </h2>
+
+                            <p>
+                                Registre uma entrada ou saída, com valor e peso quando necessário.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form id="financeForm">
+
+                        <div class="finance-form-grid">
+
+                            <div class="form-group">
+
+                                <label for="movementType">
+                                    Tipo *
+                                </label>
+
+                                <select
+                                    id="movementType"
+                                    class="finance-select"
+                                    required
+                                >
+                                    <option value="entrada">
+                                        Entrada
+                                    </option>
+
+                                    <option value="saida">
+                                        Saída
+                                    </option>
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group finance-description-field">
+
+                                <label for="movementDescription">
+                                    Descrição *
+                                </label>
+
+                                <input
+                                    id="movementDescription"
+                                    type="text"
+                                    placeholder="Exemplo: Compra de parafina"
+                                    maxlength="140"
+                                    autocomplete="off"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="movementValue">
+                                    Valor *
+                                </label>
+
+                                <input
+                                    id="movementValue"
+                                    type="text"
+                                    inputmode="decimal"
+                                    placeholder="Exemplo: 150,00"
+                                    maxlength="20"
+                                    autocomplete="off"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="movementWeight">
+                                    Peso (g)
+                                </label>
+
+                                <input
+                                    id="movementWeight"
+                                    type="text"
+                                    inputmode="decimal"
+                                    placeholder="Exemplo: 250,5"
+                                    maxlength="20"
+                                    autocomplete="off"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="finance-form-actions">
+
+                            <button
+                                class="primary-button register-finance-button"
+                                type="submit"
+                            >
+                                <span aria-hidden="true">+</span>
+                                Registrar movimentação
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </section>
+
+
+                <!-- HISTÓRICO -->
+                <section class="panel finance-history-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Histórico geral
+                            </h2>
+
+                            <p>
+                                Movimentações registradas durante esta sessão.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-wrapper finance-table-wrapper">
+
+                        <table class="activity-table finance-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                    <th>Tipo</th>
+                                    <th>Valor</th>
+                                    <th>Peso</th>
+                                    <th>Data e hora</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="financeTableBody">
+                                <!-- Inserido pelo JavaScript -->
+                            </tbody>
+
+                        </table>
+
+
+                        <div
+                            class="finance-empty-state"
+                            id="financeEmptyState"
+                            hidden
+                        >
+
+                            <div
+                                class="empty-icon"
+                                aria-hidden="true"
+                            >
+                                R$
+                            </div>
+
+                            <strong>
+                                Nenhuma movimentação encontrada
+                            </strong>
+
+                            <p>
+                                Registre uma movimentação ou uma venda
+                                para começar o histórico do controle geral.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="finance-table-footer">
+
+                        <span id="financeCounter">
+                            0 movimentações registradas
+                        </span>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <!-- NOTIFICAÇÃO -->
+    <app-toast></app-toast>
+
+
+    <noscript>
+        <div class="noscript-message">
+            Ative o JavaScript para utilizar o Controle Geral.
+        </div>
+    </noscript>
+
+</body>
+
+</html>

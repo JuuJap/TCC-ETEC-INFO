@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velas São Tomé | Criar Conta</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="background"></div>
+
+    <header class="header">
+<h1 class="logo">
+    <img src="img/Logo1.png" alt="Logo Velas S. Tomé">
+    <span>Velas S. Tomé</span>
+</h1>
+
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav>
+            <a href="#">Contato</a>
+            <a href="index.html">Login</a>
+            <button id="theme-toggle" type="button" onclick="toggleTheme()">
+                <span class="icon">🌙</span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+<div class="login-container">
+    <h2>Criar Conta</h2>
+    <input id="cadastro-usuario" type="text" placeholder="Usuário">
+    <input id="cadastro-senha" type="password" placeholder="Senha">
+    <input id="confirmar-senha" type="password" placeholder="Confirmar senha">
+    <button type="button" onclick="criarConta()">Cadastrar</button>
+    <a href="index.html" class="forgot-password">Já tenho conta</a>
+</div>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

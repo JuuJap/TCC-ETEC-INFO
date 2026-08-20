@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Configurações demonstrativas do sistema Velas S. Tomé"
+    >
+
+    <title>Velas S. Tomé | Configurações</title>
+
+    <link
+        rel="icon"
+        href="img/Logo1.png"
+        type="image/png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/home.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/configuracoes.css"
+    >
+
+    <script src="js/common.js?v=2" defer></script>
+    <script src="js/configuracoes.js?v=1" defer></script>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <app-sidebar active="configuracoes"></app-sidebar>
+
+        <div class="main-shell">
+
+            <app-topbar
+                search-id="settingsSearch"
+                search-class="settings-search-box"
+                placeholder="Buscar configuração..."
+                search-label="Buscar configurações"
+            ></app-topbar>
+
+            <main class="content settings-content">
+
+                <section class="page-heading settings-heading">
+
+                    <div>
+
+                        <span class="demo-badge">
+                            Configuração local
+                        </span>
+
+                        <h1>
+                            Configurações
+                        </h1>
+
+                        <p>
+                            Personalize a aparência, os dados da empresa
+                            e consulte informações gerais do sistema.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- APARÊNCIA -->
+                <section
+                    class="panel settings-section"
+                    data-settings-search="aparência tema claro escuro automático sistema"
+                >
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Aparência
+                            </h2>
+
+                            <p>
+                                Escolha como o sistema deve ser exibido neste navegador.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="theme-options" id="themeOptions">
+
+                        <label class="theme-option">
+
+                            <input
+                                type="radio"
+                                name="appearanceTheme"
+                                value="light"
+                            >
+
+                            <span class="theme-option-preview light-preview">
+                                Aa
+                            </span>
+
+                            <span class="theme-option-text">
+
+                                <strong>
+                                    Claro
+                                </strong>
+
+                                <small>
+                                    Usa sempre o tema claro.
+                                </small>
+
+                            </span>
+
+                        </label>
+
+
+                        <label class="theme-option">
+
+                            <input
+                                type="radio"
+                                name="appearanceTheme"
+                                value="dark"
+                            >
+
+                            <span class="theme-option-preview dark-preview">
+                                Aa
+                            </span>
+
+                            <span class="theme-option-text">
+
+                                <strong>
+                                    Escuro
+                                </strong>
+
+                                <small>
+                                    Usa sempre o tema escuro.
+                                </small>
+
+                            </span>
+
+                        </label>
+
+
+                        <label class="theme-option">
+
+                            <input
+                                type="radio"
+                                name="appearanceTheme"
+                                value="system"
+                            >
+
+                            <span class="theme-option-preview system-preview">
+                                ◐
+                            </span>
+
+                            <span class="theme-option-text">
+
+                                <strong>
+                                    Automático
+                                </strong>
+
+                                <small>
+                                    Segue o tema configurado no computador.
+                                </small>
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </section>
+
+
+                <!-- DADOS DA EMPRESA -->
+                <section
+                    class="panel settings-section"
+                    data-settings-search="empresa nome telefone endereço cnpj dados cadastro"
+                >
+
+                    <div class="panel-header settings-panel-header">
+
+                        <div>
+
+                            <h2>
+                                Dados da empresa
+                            </h2>
+
+                            <p>
+                                Informações básicas da Velas S. Tomé.
+                            </p>
+
+                        </div>
+
+                        <span class="settings-local-badge">
+                            Salvo neste navegador
+                        </span>
+
+                    </div>
+
+                    <form id="companySettingsForm">
+
+                        <div class="company-settings-grid">
+
+                            <div class="form-group">
+
+                                <label for="companyName">
+                                    Nome da empresa
+                                </label>
+
+                                <input
+                                    id="companyName"
+                                    type="text"
+                                    maxlength="100"
+                                    placeholder="Velas S. Tomé"
+                                    autocomplete="organization"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="companyPhone">
+                                    Telefone
+                                </label>
+
+                                <input
+                                    id="companyPhone"
+                                    type="text"
+                                    maxlength="30"
+                                    placeholder="Exemplo: (11) 99999-9999"
+                                    autocomplete="tel"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group full-column">
+
+                                <label for="companyAddress">
+                                    Endereço
+                                </label>
+
+                                <input
+                                    id="companyAddress"
+                                    type="text"
+                                    maxlength="180"
+                                    placeholder="Exemplo: Rua das Flores, 123"
+                                    autocomplete="street-address"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group full-column">
+
+                                <label for="companyCnpj">
+                                    CNPJ
+                                </label>
+
+                                <input
+                                    id="companyCnpj"
+                                    type="text"
+                                    maxlength="30"
+                                    placeholder="Exemplo: 00.000.000/0001-00"
+                                    autocomplete="off"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-form-footer">
+
+                            <p>
+                                Estes dados ainda não são enviados para um banco de dados.
+                                Eles permanecem somente neste navegador.
+                            </p>
+
+                            <button
+                                class="primary-button"
+                                type="submit"
+                            >
+                                Salvar alterações
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </section>
+
+
+                <!-- DADOS DO SISTEMA -->
+                <section
+                    class="panel settings-section"
+                    data-settings-search="dados sistema clientes produtos vendas pedidos quantidade registros"
+                >
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Dados do sistema
+                            </h2>
+
+                            <p>
+                                Resumo dos registros armazenados durante esta sessão.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="settings-stats-grid">
+
+                        <article class="settings-stat">
+
+                            <span class="settings-stat-icon">
+                                C
+                            </span>
+
+                            <div>
+
+                                <strong id="settingsClientsCount">
+                                    0
+                                </strong>
+
+                                <span>
+                                    Clientes
+                                </span>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="settings-stat">
+
+                            <span class="settings-stat-icon">
+                                P
+                            </span>
+
+                            <div>
+
+                                <strong id="settingsProductsCount">
+                                    0
+                                </strong>
+
+                                <span>
+                                    Produtos
+                                </span>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="settings-stat">
+
+                            <span class="settings-stat-icon">
+                                $
+                            </span>
+
+                            <div>
+
+                                <strong id="settingsSalesCount">
+                                    0
+                                </strong>
+
+                                <span>
+                                    Vendas
+                                </span>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="settings-stat">
+
+                            <span class="settings-stat-icon">
+                                ▤
+                            </span>
+
+                            <div>
+
+                                <strong id="settingsOrdersCount">
+                                    0
+                                </strong>
+
+                                <span>
+                                    Pedidos
+                                </span>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+
+                <!-- GERENCIAMENTO DOS DADOS -->
+                <section
+                    class="panel settings-section"
+                    data-settings-search="gerenciamento dados restaurar demonstração limpar temporários apagar sessão"
+                >
+
+                    <div class="panel-header settings-panel-header">
+
+                        <div>
+
+                            <h2>
+                                Gerenciamento dos dados
+                            </h2>
+
+                            <p>
+                                Área preparada para futuras opções de manutenção.
+                            </p>
+
+                        </div>
+
+                        <span class="settings-future-badge">
+                            Funções futuras
+                        </span>
+
+                    </div>
+
+                    <div class="data-management-grid">
+
+                        <article class="management-card">
+
+                            <div>
+
+                                <strong>
+                                    Restaurar dados da demonstração
+                                </strong>
+
+                                <p>
+                                    No futuro, permitirá recriar os dados de exemplo
+                                    usados para apresentação do sistema.
+                                </p>
+
+                            </div>
+
+                            <button
+                                class="secondary-button future-action"
+                                type="button"
+                                data-future-action="restaurar os dados da demonstração"
+                            >
+                                Restaurar demonstração
+                            </button>
+
+                        </article>
+
+
+                        <article class="management-card danger-management-card">
+
+                            <div>
+
+                                <strong>
+                                    Limpar dados temporários
+                                </strong>
+
+                                <p>
+                                    No futuro, permitirá apagar os registros temporários
+                                    criados durante a utilização.
+                                </p>
+
+                            </div>
+
+                            <button
+                                class="secondary-button future-action"
+                                type="button"
+                                data-future-action="limpar os dados temporários"
+                            >
+                                Limpar dados
+                            </button>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SOBRE -->
+                <section
+                    class="panel settings-section about-system-panel"
+                    data-settings-search="sobre sistema versão tecnologias html css javascript tcc velas são tomé"
+                >
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Sobre o sistema
+                            </h2>
+
+                            <p>
+                                Informações da versão demonstrativa.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="about-system">
+
+                        <img
+                            src="img/Logo1.png"
+                            alt="Logo da Velas S. Tomé"
+                        >
+
+                        <div class="about-system-text">
+
+                            <strong>
+                                Velas S. Tomé
+                            </strong>
+
+                            <span>
+                                Sistema de gerenciamento empresarial
+                            </span>
+
+                            <div class="about-tags">
+
+                                <span>
+                                    Versão demonstrativa
+                                </span>
+
+                                <span>
+                                    HTML5
+                                </span>
+
+                                <span>
+                                    CSS3
+                                </span>
+
+                                <span>
+                                    JavaScript
+                                </span>
+
+                            </div>
+
+                            <p>
+                                Projeto desenvolvido para fins acadêmicos.
+                                A persistência definitiva dos dados e integrações
+                                com banco de dados poderão ser adicionadas em etapas futuras.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <div
+                    class="settings-empty-search"
+                    id="settingsEmptySearch"
+                    hidden
+                >
+
+                    <strong>
+                        Nenhuma configuração encontrada
+                    </strong>
+
+                    <p>
+                        Tente pesquisar utilizando outro termo.
+                    </p>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <app-toast></app-toast>
+
+    <noscript>
+        <div class="noscript-message">
+            Ative o JavaScript para utilizar as configurações.
+        </div>
+    </noscript>
+
+</body>
+
+</html>

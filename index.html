@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velas São Tomé | Login</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="background"></div>
+
+    <header class="header">
+<h1 class="logo">
+    <img src="img/Logo1.png" alt="Logo Velas S. Tomé">
+    <span>Velas S. Tomé</span>
+</h1>
+
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav>
+            <a href="#">Contato</a>
+            <a href="cadastro.html">Criar conta</a>
+            <button id="theme-toggle" type="button" onclick="toggleTheme()">
+                <span class="icon">🌙</span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="login-container">
+    <h2>Entrar</h2>
+    <input id="login-usuario" type="text" placeholder="Usuário">
+    <input id="login-senha" type="password" placeholder="Senha">
+    <button type="button" onclick="entrar()">Entrar</button>
+    <a href="#" class="forgot-password">Esqueci minha senha</a>
+</div>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
