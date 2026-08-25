@@ -601,6 +601,7 @@ function syncOrderWithFinance(order) {
         description: `Pedido #${formatOrderNumber(order.number)} - ${order.client}`,
         value: order.totalValue,
         weight: order.totalWeight,
+        weightType: "saida",
         createdAt: index !== -1 ? movements[index].createdAt : Date.now(),
         source: "order",
         sourceId: order.id

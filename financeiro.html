@@ -35,7 +35,7 @@
     <script src="js/common.js?v=1" defer></script>
 
     <script
-        src="js/financeiro.js?v=3"
+        src="js/financeiro.js?v=4"
         defer
     ></script>
 </head>
@@ -85,86 +85,154 @@
                 </section>
 
 
-                <!-- RESUMO -->
-                <section
-                    class="stats-grid financial-stats-grid"
-                    aria-label="Resumo do controle geral"
-                >
+                <!-- CONTROLE FINANCEIRO -->
+                <section class="control-summary-section">
 
-                    <article class="stat-card financial-stat-card">
-
-                        <div class="stat-card-header">
-                            <div class="stat-icon">R$</div>
+                    <div class="control-summary-heading">
+                        <div>
+                            <h2>Controle financeiro</h2>
+                            <p>Resumo das entradas, saídas e saldo em dinheiro.</p>
                         </div>
+                    </div>
 
-                        <p>Saldo atual</p>
+                    <div
+                        class="stats-grid financial-stats-grid"
+                        aria-label="Resumo financeiro"
+                    >
 
-                        <strong id="currentBalance">
-                            R$ 0,00
-                        </strong>
+                        <article class="stat-card financial-stat-card">
 
-                        <small>
-                            Entradas menos saídas
-                        </small>
+                            <div class="stat-card-header">
+                                <div class="stat-icon">R$</div>
+                            </div>
 
-                    </article>
+                            <p>Saldo atual</p>
+
+                            <strong id="currentBalance">
+                                R$ 0,00
+                            </strong>
+
+                            <small>
+                                Entradas menos saídas
+                            </small>
+
+                        </article>
 
 
-                    <article class="stat-card financial-stat-card">
+                        <article class="stat-card financial-stat-card">
 
-                        <div class="stat-card-header">
-                            <div class="stat-icon">+</div>
+                            <div class="stat-card-header">
+                                <div class="stat-icon">+</div>
+                            </div>
+
+                            <p>Total de entradas</p>
+
+                            <strong id="totalIncome">
+                                R$ 0,00
+                            </strong>
+
+                            <small>
+                                Inclui vendas e pedidos
+                            </small>
+
+                        </article>
+
+
+                        <article class="stat-card financial-stat-card">
+
+                            <div class="stat-card-header">
+                                <div class="stat-icon">−</div>
+                            </div>
+
+                            <p>Total de saídas</p>
+
+                            <strong id="totalExpenses">
+                                R$ 0,00
+                            </strong>
+
+                            <small>
+                                Despesas registradas
+                            </small>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+
+                <!-- CONTROLE DE PESO -->
+                <section class="control-summary-section weight-control-section">
+
+                    <div class="control-summary-heading">
+                        <div>
+                            <h2>Controle de peso</h2>
+                            <p>Resumo das entradas, saídas e saldo de peso.</p>
                         </div>
+                    </div>
 
-                        <p>Total de entradas</p>
+                    <div
+                        class="stats-grid financial-stats-grid"
+                        aria-label="Resumo de peso"
+                    >
 
-                        <strong id="totalIncome">
-                            R$ 0,00
-                        </strong>
+                        <article class="stat-card financial-stat-card weight-stat-card">
 
-                        <small>
-                            Inclui vendas registradas
-                        </small>
+                            <div class="stat-card-header">
+                                <div class="stat-icon">g</div>
+                            </div>
 
-                    </article>
+                            <p>Saldo de peso</p>
 
+                            <strong id="currentWeightBalance">
+                                0 g
+                            </strong>
 
-                    <article class="stat-card financial-stat-card">
+                            <small>
+                                Entradas menos saídas
+                            </small>
 
-                        <div class="stat-card-header">
-                            <div class="stat-icon">−</div>
-                        </div>
-
-                        <p>Total de saídas</p>
-
-                        <strong id="totalExpenses">
-                            R$ 0,00
-                        </strong>
-
-                        <small>
-                            Despesas registradas
-                        </small>
-
-                    </article>
+                        </article>
 
 
-                    <article class="stat-card financial-stat-card">
+                        <article class="stat-card financial-stat-card weight-stat-card">
 
-                        <div class="stat-card-header">
-                            <div class="stat-icon">g</div>
-                        </div>
+                            <div class="stat-card-header">
+                                <div class="stat-icon">+</div>
+                            </div>
 
-                        <p>Peso total registrado</p>
+                            <p>Entradas de peso</p>
 
-                        <strong id="totalWeight">
-                            0 g
-                        </strong>
+                            <strong id="totalWeightIncome">
+                                0 g
+                            </strong>
 
-                        <small>
-                            Soma dos pesos das movimentações
-                        </small>
+                            <small>
+                                Peso recebido ou adicionado
+                            </small>
 
-                    </article>
+                        </article>
+
+
+                        <article class="stat-card financial-stat-card weight-stat-card">
+
+                            <div class="stat-card-header">
+                                <div class="stat-icon">−</div>
+                            </div>
+
+                            <p>Saídas de peso</p>
+
+                            <strong id="totalWeightExpenses">
+                                0 g
+                            </strong>
+
+                            <small>
+                                Peso utilizado ou enviado
+                            </small>
+
+                        </article>
+
+                    </div>
 
                 </section>
 
@@ -181,7 +249,7 @@
                             </h2>
 
                             <p>
-                                Registre uma entrada ou saída, com valor e peso quando necessário.
+                                Registre valor, peso ou ambos. O tipo financeiro e o tipo do peso podem ser diferentes.
                             </p>
 
                         </div>
@@ -196,7 +264,7 @@
                             <div class="form-group">
 
                                 <label for="movementType">
-                                    Tipo *
+                                    Tipo financeiro
                                 </label>
 
                                 <select
@@ -237,7 +305,7 @@
                             <div class="form-group">
 
                                 <label for="movementValue">
-                                    Valor *
+                                    Valor (R$)
                                 </label>
 
                                 <input
@@ -247,8 +315,29 @@
                                     placeholder="Exemplo: 150,00"
                                     maxlength="20"
                                     autocomplete="off"
-                                    required
                                 >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="movementWeightType">
+                                    Tipo do peso
+                                </label>
+
+                                <select
+                                    id="movementWeightType"
+                                    class="finance-select"
+                                >
+                                    <option value="entrada">
+                                        Entrada
+                                    </option>
+
+                                    <option value="saida">
+                                        Saída
+                                    </option>
+                                </select>
 
                             </div>
 
@@ -317,8 +406,9 @@
                             <thead>
                                 <tr>
                                     <th>Descrição</th>
-                                    <th>Tipo</th>
+                                    <th>Financeiro</th>
                                     <th>Valor</th>
+                                    <th>Mov. de peso</th>
                                     <th>Peso</th>
                                     <th>Data e hora</th>
                                 </tr>

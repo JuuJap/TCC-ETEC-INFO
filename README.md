@@ -17,7 +17,7 @@ A versão atual funciona totalmente no navegador, utilizando armazenamento tempo
 - Cadastro, edição, exclusão, busca e filtros de clientes
 - Cadastro, edição, exclusão, busca e filtros de produtos
 - Registro e histórico de vendas
-- Controle Geral de entradas, saídas, saldo e peso
+- Controle Geral com entradas, saídas e saldo financeiro, além de entradas, saídas e saldo de peso
 - Integração automática das vendas com o Controle Geral
 - Montagem completa de pedidos
 - Preenchimento automático de endereço ao selecionar um cliente
@@ -25,7 +25,7 @@ A versão atual funciona totalmente no navegador, utilizando armazenamento tempo
 - Vários itens por pedido
 - Cálculo automático de valores e pesos
 - Histórico, visualização, edição e exclusão de pedidos
-- Integração dos pedidos com o Controle Geral, incluindo valor e peso
+- Integração dos pedidos com o Controle Geral: entrada financeira e saída de peso
 - Download de pedidos em `.txt`
 - Impressão de pedidos e possibilidade de salvar em PDF
 - Histórico de atividades na Home

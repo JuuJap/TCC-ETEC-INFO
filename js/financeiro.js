@@ -73,9 +73,20 @@ function loadMovements() {
 
         return parsed.map(movement => ({
             ...movement,
+
             weight:
                 Number(movement.weight) ||
-                0
+                0,
+
+            weightType:
+                movement.weightType === "entrada" ||
+                movement.weightType === "saida"
+                    ? movement.weightType
+                    : movement.source === "order"
+                        ? "saida"
+                        : movement.type === "saida"
+                            ? "saida"
+                            : "entrada"
         }));
 
     } catch (error) {
@@ -179,6 +190,9 @@ function syncExistingSales() {
                     Number(sale.weight) ||
                     0,
 
+                weightType:
+                    "saida",
+
                 createdAt:
                     Number(sale.createdAt) ||
                     Date.now(),
@@ -276,6 +290,9 @@ function syncExistingOrders() {
                 weight:
                     orderWeight,
 
+                weightType:
+                    "saida",
+
                 createdAt:
                     index !== -1
                         ? movements[index].createdAt
@@ -296,6 +313,7 @@ function syncExistingOrders() {
                 if (
                     Number(previous.value) !== movement.value ||
                     Number(previous.weight || 0) !== movement.weight ||
+                    previous.weightType !== movement.weightType ||
                     previous.description !== movement.description
                 ) {
                     movements[index] = movement;
@@ -369,6 +387,11 @@ function registerMovement(event) {
             "movementValue"
         );
 
+    const weightTypeInput =
+        document.getElementById(
+            "movementWeightType"
+        );
+
     const weightInput =
         document.getElementById(
             "movementWeight"
@@ -378,6 +401,7 @@ function registerMovement(event) {
         !typeInput ||
         !descriptionInput ||
         !valueInput ||
+        !weightTypeInput ||
         !weightInput
     ) {
         return;
@@ -385,6 +409,9 @@ function registerMovement(event) {
 
     const type =
         typeInput.value;
+
+    const weightType =
+        weightTypeInput.value;
 
     const description =
         descriptionInput
@@ -413,6 +440,18 @@ function registerMovement(event) {
         return;
     }
 
+    if (
+        weightType !== "entrada" &&
+        weightType !== "saida"
+    ) {
+
+        showToast(
+            "Selecione um tipo de movimentação de peso válido."
+        );
+
+        return;
+    }
+
     if (!description) {
 
         showToast(
@@ -426,7 +465,7 @@ function registerMovement(event) {
 
     if (
         !Number.isFinite(value) ||
-        value <= 0
+        value < 0
     ) {
 
         showToast(
@@ -452,6 +491,20 @@ function registerMovement(event) {
         return;
     }
 
+    if (
+        value <= 0 &&
+        weight <= 0
+    ) {
+
+        showToast(
+            "Informe um valor, um peso ou ambos."
+        );
+
+        valueInput.focus();
+
+        return;
+    }
+
     const movement = {
 
         id:
@@ -464,6 +517,8 @@ function registerMovement(event) {
         value,
 
         weight,
+
+        weightType,
 
         createdAt:
             Date.now(),
@@ -492,6 +547,9 @@ function registerMovement(event) {
         "";
 
     typeInput.value =
+        "entrada";
+
+    weightTypeInput.value =
         "entrada";
 
     const searchInput =
@@ -660,6 +718,10 @@ function getFilteredMovements() {
                         formatCurrency(
                             movement.value
                         ),
+                        movement.weightType,
+                        movement.weightType === "entrada"
+                            ? "entrada peso"
+                            : "saida saída peso",
                         formatWeight(
                             movement.weight
                         ),
@@ -726,16 +788,43 @@ function renderSummary() {
         totalIncome -
         totalExpenses;
 
-    const totalWeight =
-        movements.reduce(
-            (total, movement) =>
-                total +
-                Number(
-                    movement.weight ||
-                    0
-                ),
-            0
-        );
+    const totalWeightIncome =
+        movements
+            .filter(
+                movement =>
+                    movement.weightType ===
+                    "entrada"
+            )
+            .reduce(
+                (total, movement) =>
+                    total +
+                    Number(
+                        movement.weight ||
+                        0
+                    ),
+                0
+            );
+
+    const totalWeightExpenses =
+        movements
+            .filter(
+                movement =>
+                    movement.weightType ===
+                    "saida"
+            )
+            .reduce(
+                (total, movement) =>
+                    total +
+                    Number(
+                        movement.weight ||
+                        0
+                    ),
+                0
+            );
+
+    const weightBalance =
+        totalWeightIncome -
+        totalWeightExpenses;
 
     setText(
         "totalIncome",
@@ -759,9 +848,23 @@ function renderSummary() {
     );
 
     setText(
-        "totalWeight",
+        "totalWeightIncome",
         formatWeight(
-            totalWeight
+            totalWeightIncome
+        )
+    );
+
+    setText(
+        "totalWeightExpenses",
+        formatWeight(
+            totalWeightExpenses
+        )
+    );
+
+    setText(
+        "currentWeightBalance",
+        formatWeight(
+            weightBalance
         )
     );
 }
@@ -853,6 +956,11 @@ function createMovementRow(
             "td"
         );
 
+    const weightTypeCell =
+        document.createElement(
+            "td"
+        );
+
     const weightCell =
         document.createElement(
             "td"
@@ -905,22 +1013,71 @@ function createMovementRow(
         }`;
 
     valueCell.textContent =
-        `${
-            isIncome
-                ? "+"
-                : "−"
-        } ${formatCurrency(
-            movement.value
-        )}`;
+        Number(movement.value) > 0
+            ? `${
+                isIncome
+                    ? "+"
+                    : "−"
+            } ${formatCurrency(
+                movement.value
+            )}`
+            : "—";
+
+    const isWeightIncome =
+        movement.weightType ===
+        "entrada";
+
+    weightTypeCell.className =
+        "finance-weight-type";
+
+    if (
+        Number(movement.weight) >
+        0
+    ) {
+
+        const weightTypeBadge =
+            document.createElement(
+                "span"
+            );
+
+        weightTypeBadge.className =
+            `finance-type-badge ${
+                isWeightIncome
+                    ? "income"
+                    : "expense"
+            }`;
+
+        weightTypeBadge.textContent =
+            isWeightIncome
+                ? "Entrada"
+                : "Saída";
+
+        weightTypeCell.appendChild(
+            weightTypeBadge
+        );
+
+    } else {
+
+        weightTypeCell.textContent =
+            "—";
+    }
 
     weightCell.className =
-        "finance-weight";
+        `finance-weight ${
+            isWeightIncome
+                ? "income"
+                : "expense"
+        }`;
 
     weightCell.textContent =
         Number(movement.weight) > 0
-            ? formatWeight(
+            ? `${
+                isWeightIncome
+                    ? "+"
+                    : "−"
+            } ${formatWeight(
                 movement.weight
-            )
+            )}`
             : "—";
 
     dateCell.className =
@@ -935,6 +1092,7 @@ function createMovementRow(
         descriptionCell,
         typeCell,
         valueCell,
+        weightTypeCell,
         weightCell,
         dateCell
     );

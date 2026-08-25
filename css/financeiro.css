@@ -17,7 +17,7 @@
 ========================================================= */
 
 .financial-stats-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .financial-stat-card strong {
@@ -44,10 +44,11 @@
 .finance-form-grid {
     display: grid;
     grid-template-columns:
-        minmax(150px, 0.7fr)
-        minmax(240px, 1.7fr)
-        minmax(170px, 0.85fr)
-        minmax(170px, 0.85fr);
+        minmax(135px, 0.72fr)
+        minmax(240px, 1.6fr)
+        minmax(150px, 0.8fr)
+        minmax(135px, 0.72fr)
+        minmax(150px, 0.8fr);
     gap: 18px;
 }
 
@@ -119,7 +120,7 @@
 }
 
 .finance-table {
-    min-width: 900px;
+    min-width: 1080px;
 }
 
 .finance-table th:first-child,
@@ -374,4 +375,78 @@ body.dark-mode .finance-value.expense {
 
 .financial-stat-card:nth-child(4) .stat-icon {
     font-size: 18px;
+}
+
+
+/* =========================================================
+   RESUMOS FINANCEIRO E DE PESO
+========================================================= */
+
+.control-summary-section {
+    margin-bottom: 22px;
+}
+
+.control-summary-heading {
+    margin-bottom: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.control-summary-heading h2 {
+    margin: 0 0 3px;
+
+    color: var(--text-primary);
+
+    font-size: 14px;
+}
+
+.control-summary-heading p {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+}
+
+.weight-control-section {
+    margin-top: -2px;
+}
+
+.weight-stat-card .stat-icon {
+    font-size: 18px;
+}
+
+.finance-weight-type {
+    min-width: 115px;
+}
+
+.finance-weight.income {
+    color: #34714b;
+}
+
+.finance-weight.expense {
+    color: #a85442;
+}
+
+body.dark-mode .finance-weight.income {
+    color: #9bd6ac;
+}
+
+body.dark-mode .finance-weight.expense {
+    color: #e1a292;
+}
+
+@media (max-width: 1180px) {
+
+    .finance-form-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .finance-description-field {
+        grid-column: span 2;
+    }
+
 }
