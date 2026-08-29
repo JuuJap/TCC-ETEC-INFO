@@ -1,4 +1,4 @@
-# Velas S. Tomé
+# Velas São Tomé
 
 Sistema web demonstrativo desenvolvido como parte de um Trabalho de Conclusão de Curso (TCC).
 
