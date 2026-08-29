@@ -1,0 +1,294 @@
+/* =========================================================
+   PÁGINA DE VENDAS
+   Complementa o home.css
+========================================================= */
+
+.sales-content {
+    padding-bottom: 45px;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.sales-heading {
+    align-items: center;
+}
+
+
+/* =========================================================
+   PAINEL DE REGISTRO
+========================================================= */
+
+.sale-register-panel {
+    margin-bottom: 22px;
+}
+
+.sale-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(220px, 1fr);
+
+    gap: 18px;
+}
+
+.sale-form-actions {
+    margin-top: 8px;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+.register-sale-button {
+    min-height: 46px;
+
+    padding-inline: 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+}
+
+.register-sale-button span {
+    font-size: 19px;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   HISTÓRICO
+========================================================= */
+
+.sales-history-panel {
+    padding-bottom: 0;
+
+    overflow: hidden;
+}
+
+.sales-table-wrapper {
+    margin-inline: -22px;
+
+    overflow-x: auto;
+}
+
+.sales-table {
+    min-width: 700px;
+}
+
+
+/* PRIMEIRA COLUNA */
+
+.sales-table th:first-child,
+.sales-table td:first-child {
+    padding-left: 22px;
+}
+
+
+/* ÚLTIMA COLUNA */
+
+.sales-table th:last-child,
+.sales-table td:last-child {
+    padding-right: 22px;
+}
+
+
+/* =========================================================
+   DESCRIÇÃO
+========================================================= */
+
+.sale-description {
+    min-width: 260px;
+
+    color: var(--text-primary);
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   VALOR
+========================================================= */
+
+.sale-value {
+    min-width: 130px;
+
+    color: var(--primary);
+
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+.sale-date {
+    min-width: 180px;
+
+    color: var(--text-secondary);
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   SEM RESULTADOS
+========================================================= */
+
+.sales-empty-state {
+    padding: 55px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    color: var(--text-secondary);
+
+    text-align: center;
+}
+
+.sales-empty-state[hidden] {
+    display: none;
+}
+
+.empty-icon {
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--primary);
+
+    background: var(--primary-soft);
+
+    border-radius: 15px;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.sales-empty-state strong {
+    color: var(--text-primary);
+
+    font-size: 14px;
+}
+
+.sales-empty-state p {
+    max-width: 400px;
+
+    margin: 0;
+
+    font-size: 12px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   RODAPÉ DA TABELA
+========================================================= */
+
+.sales-table-footer {
+    min-height: 52px;
+
+    margin-inline: -22px;
+
+    padding: 14px 22px;
+
+    display: flex;
+    align-items: center;
+
+    color: var(--text-secondary);
+
+    background: var(--surface-soft);
+
+    border-top:
+        1px
+        solid
+        var(--border);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PESQUISA
+========================================================= */
+
+.sale-search-box {
+    width: min(620px, 100%);
+}
+
+
+/* =========================================================
+   CAMPOS
+========================================================= */
+
+.sale-register-panel input {
+    width: 100%;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .sale-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .sales-heading {
+        align-items: stretch;
+    }
+
+    .sale-form-actions {
+        justify-content: stretch;
+    }
+
+    .register-sale-button {
+        width: 100%;
+    }
+
+    .sales-table-wrapper {
+        margin-inline: -18px;
+    }
+
+    .sales-table th:first-child,
+    .sales-table td:first-child {
+        padding-left: 18px;
+    }
+
+    .sales-table th:last-child,
+    .sales-table td:last-child {
+        padding-right: 18px;
+    }
+
+    .sales-table-footer {
+        margin-inline: -18px;
+
+        padding-inline: 18px;
+    }
+
+}

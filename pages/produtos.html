@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Cadastro de produtos da Velas S. Tomé"
+    >
+
+    <title>Velas S. Tomé | Produtos</title>
+
+    <link
+        rel="icon"
+        href="../assets/img/Logo1.png"
+        type="image/png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/home.css?v=5"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/produtos.css"
+    >
+
+    <script src="../assets/js/backend-sync.js?v=5" defer></script>
+    <script src="../assets/js/common.js?v=5" defer></script>
+
+    <script
+        src="../assets/js/produtos.js?v=5"
+        defer
+    ></script>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- =====================================================
+             MENU LATERAL
+        ====================================================== -->
+
+        <app-sidebar active="produtos"></app-sidebar>
+
+
+        <!-- =====================================================
+             ÁREA PRINCIPAL
+        ====================================================== -->
+
+        <div class="main-shell">
+
+
+            <!-- CABEÇALHO -->
+            <app-topbar search-id="productSearch" search-class="product-search-box" placeholder="Buscar produto por nome, tipo, cor ou característica..." search-label="Buscar produtos"></app-topbar>
+
+
+            <!-- =================================================
+                 CONTEÚDO
+            ================================================== -->
+
+            <main class="content products-content">
+
+
+                <!-- CABEÇALHO DA PÁGINA -->
+                <section class="page-heading products-heading">
+
+                    <div>
+
+                        <span class="demo-badge">
+                            Banco de dados
+                        </span>
+
+                        <h1>
+                            Produtos
+                        </h1>
+
+                        <p>
+                            Cadastre e organize os produtos disponíveis
+                            no sistema.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="primary-button new-product-button"
+                        id="newProductButton"
+                        type="button"
+                    >
+
+                        <span aria-hidden="true">
+                            +
+                        </span>
+
+                        Novo produto
+
+                    </button>
+
+                </section>
+
+
+                <!-- =================================================
+                     RESUMO
+                ================================================== -->
+
+                <section
+                    class="stats-grid product-stats-grid"
+                    aria-label="Resumo dos produtos"
+                >
+
+
+                    <!-- TOTAL -->
+                    <article class="stat-card product-stat-card">
+
+                        <div class="stat-card-header">
+
+                            <div class="stat-icon">
+                                P
+                            </div>
+
+                        </div>
+
+                        <p>
+                            Produtos cadastrados
+                        </p>
+
+                        <strong id="totalProducts">
+                            0
+                        </strong>
+
+                        <small>
+                            Registros cadastrados
+                        </small>
+
+                    </article>
+
+
+                    <!-- TIPOS -->
+                    <article class="stat-card product-stat-card">
+
+                        <div class="stat-card-header">
+
+                            <div class="stat-icon">
+                                T
+                            </div>
+
+                        </div>
+
+                        <p>
+                            Tipos diferentes
+                        </p>
+
+                        <strong id="totalTypes">
+                            0
+                        </strong>
+
+                        <small>
+                            Categorias de produtos cadastradas
+                        </small>
+
+                    </article>
+
+
+                    <!-- CORES -->
+                    <article class="stat-card product-stat-card">
+
+                        <div class="stat-card-header">
+
+                            <div class="stat-icon">
+                                C
+                            </div>
+
+                        </div>
+
+                        <p>
+                            Cores diferentes
+                        </p>
+
+                        <strong id="totalColors">
+                            0
+                        </strong>
+
+                        <small>
+                            Cores presentes nos cadastros
+                        </small>
+
+                    </article>
+
+                </section>
+
+
+                <!-- =================================================
+                     LISTA DE PRODUTOS
+                ================================================== -->
+
+                <section class="panel products-panel">
+
+                    <div class="panel-header products-panel-header">
+
+                        <div>
+
+                            <h2>
+                                Produtos cadastrados
+                            </h2>
+
+                            <p>
+                                Os registros abaixo existem apenas
+                                cadastrados no sistema.
+                            </p>
+
+                        </div>
+
+
+                        <!-- FILTRO -->
+                        <div class="products-filters">
+
+                            <label
+                                class="filter-label"
+                                for="typeFilter"
+                            >
+                                Tipo
+                            </label>
+
+                            <select
+                                id="typeFilter"
+                                class="type-filter"
+                                aria-label="Filtrar produtos por tipo"
+                            >
+
+                                <option value="all">
+                                    Todos
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TABELA -->
+                    <div class="table-wrapper products-table-wrapper">
+
+                        <table class="activity-table products-table">
+
+                            <thead>
+
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Tipo</th>
+                                    <th>Cor</th>
+                                    <th>Característica</th>
+                                    <th>Valor unitário</th>
+                                    <th>Peso unitário</th>
+                                    <th class="actions-column">
+                                        Ações
+                                    </th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="productsTableBody">
+
+                                <!-- Inserido pelo JavaScript -->
+
+                            </tbody>
+
+                        </table>
+
+
+                        <!-- SEM RESULTADOS -->
+                        <div
+                            class="products-empty-state"
+                            id="productsEmptyState"
+                            hidden
+                        >
+
+                            <div
+                                class="empty-icon"
+                                aria-hidden="true"
+                            >
+                                ▦
+                            </div>
+
+                            <strong>
+                                Nenhum produto encontrado
+                            </strong>
+
+                            <p>
+                                Tente alterar a pesquisa ou cadastre
+                                um novo produto.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="products-table-footer">
+
+                        <span id="resultsCounter">
+                            0 produtos exibidos
+                        </span>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         MODAL DE PRODUTO
+    ========================================================== -->
+
+    <div
+        class="modal"
+        id="productModal"
+        aria-hidden="true"
+        hidden
+    >
+
+        <button
+            class="modal-backdrop"
+            type="button"
+            data-close-product-modal
+            aria-label="Fechar janela"
+        ></button>
+
+
+        <section
+            class="modal-dialog product-modal-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="productModalTitle"
+        >
+
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="demo-badge">
+                        Cadastro de produto
+                    </span>
+
+                    <h2 id="productModalTitle">
+                        Novo produto
+                    </h2>
+
+                    <p id="productModalDescription">
+                        Preencha as informações do produto.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="modal-close"
+                    type="button"
+                    data-close-product-modal
+                    aria-label="Fechar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- FORMULÁRIO -->
+            <form id="productForm">
+
+                <input
+                    id="productId"
+                    type="hidden"
+                >
+
+
+                <div class="product-form-grid">
+
+
+                    <!-- NOME -->
+                    <div class="form-group full-column">
+
+                        <label for="productName">
+                            Nome do produto *
+                        </label>
+
+                        <input
+                            id="productName"
+                            type="text"
+                            placeholder="Exemplo: Vela Aromática de Lavanda"
+                            maxlength="120"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- TIPO -->
+                    <div class="form-group">
+
+                        <label for="productType">
+                            Tipo
+                        </label>
+
+                        <input
+                            id="productType"
+                            type="text"
+                            placeholder="Exemplo: Aromática"
+                            maxlength="80"
+                        >
+
+                    </div>
+
+
+                    <!-- COR -->
+                    <div class="form-group">
+
+                        <label for="productColor">
+                            Cor
+                        </label>
+
+                        <input
+                            id="productColor"
+                            type="text"
+                            placeholder="Exemplo: Bege"
+                            maxlength="60"
+                        >
+
+                    </div>
+
+
+
+                    <!-- VALOR UNITÁRIO -->
+                    <div class="form-group">
+
+                        <label for="productUnitValue">
+                            Valor unitário (R$)
+                        </label>
+
+                        <input
+                            id="productUnitValue"
+                            type="text"
+                            inputmode="decimal"
+                            placeholder="Opcional — Exemplo: 25,90"
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <!-- PESO UNITÁRIO -->
+                    <div class="form-group">
+
+                        <label for="productUnitWeight">
+                            Peso unitário (g) *
+                        </label>
+
+                        <input
+                            id="productUnitWeight"
+                            type="text"
+                            inputmode="decimal"
+                            placeholder="Exemplo: 250,5"
+                            autocomplete="off"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CARACTERÍSTICA -->
+                    <div class="form-group full-column">
+
+                        <label for="productCharacteristic">
+                            Característica
+                        </label>
+
+                        <input
+                            id="productCharacteristic"
+                            type="text"
+                            placeholder="Exemplo: Aroma de lavanda"
+                            maxlength="150"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        class="secondary-button"
+                        type="button"
+                        data-close-product-modal
+                    >
+                        Cancelar
+                    </button>
+
+
+                    <button
+                        class="primary-button"
+                        type="submit"
+                    >
+                        Salvar produto
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </div>
+
+
+    <!-- =========================================================
+         NOTIFICAÇÃO
+    ========================================================== -->
+
+    <app-toast></app-toast>
+
+
+    <noscript>
+
+        <div class="noscript-message">
+            Ative o JavaScript para utilizar o cadastro de produtos.
+        </div>
+
+    </noscript>
+
+</body>
+
+</html>

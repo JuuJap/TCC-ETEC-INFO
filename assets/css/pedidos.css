@@ -1,0 +1,579 @@
+/* =========================================================
+   PEDIDOS
+   Complementa home.css
+========================================================= */
+
+.orders-content {
+    padding-bottom: 50px;
+}
+
+.orders-heading {
+    align-items: center;
+}
+
+.order-number-heading {
+    min-width: 150px;
+    padding: 15px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.order-number-heading span {
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.order-number-heading strong {
+    color: var(--primary);
+    font-size: 22px;
+}
+
+.order-data-panel,
+.order-item-panel,
+.draft-items-panel,
+.ticket-panel {
+    margin-bottom: 22px;
+}
+
+.order-data-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(200px, 0.8fr);
+    gap: 18px;
+}
+
+.full-column {
+    grid-column: 1 / -1;
+}
+
+.order-item-grid {
+    display: grid;
+    grid-template-columns: minmax(250px, 2fr) minmax(100px, 0.55fr) minmax(150px, 0.8fr) minmax(150px, 0.8fr);
+    gap: 16px;
+}
+
+.order-data-panel input,
+.order-item-panel input {
+    width: 100%;
+}
+
+.item-calculation-preview {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.item-calculation-preview > div {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: var(--surface-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.item-calculation-preview span {
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.item-calculation-preview strong {
+    color: var(--primary);
+    font-size: 18px;
+}
+
+.order-item-actions {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.draft-items-panel {
+    padding-bottom: 0;
+    overflow: hidden;
+}
+
+.draft-items-panel .table-wrapper {
+    margin-inline: -22px;
+}
+
+.draft-items-table {
+    min-width: 760px;
+}
+
+.draft-items-table th:first-child,
+.draft-items-table td:first-child {
+    padding-left: 22px;
+}
+
+.draft-items-table th:last-child,
+.draft-items-table td:last-child {
+    padding-right: 22px;
+}
+
+.order-item-description {
+    min-width: 220px;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.order-value,
+.order-weight {
+    white-space: nowrap;
+}
+
+.order-weight {
+    color: var(--text-secondary);
+}
+
+.order-actions {
+    display: flex;
+    gap: 7px;
+}
+
+.order-action-button {
+    padding: 7px 10px;
+    color: var(--text-secondary);
+    background: var(--surface-soft);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    font: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.order-action-button:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.order-action-button.delete:hover {
+    color: #a85442;
+    border-color: #a85442;
+}
+
+.orders-empty-state {
+    padding: 45px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    text-align: center;
+}
+
+.orders-empty-state[hidden] {
+    display: none;
+}
+
+.orders-empty-state strong {
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.orders-empty-state p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+.ticket-panel {
+    overflow: hidden;
+}
+
+.order-ticket {
+    max-width: 920px;
+    margin: 8px auto 22px;
+    overflow: hidden;
+    color: #382b26;
+    background: #fffdf9;
+    border: 1px solid #d8c8bc;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(58, 38, 29, 0.08);
+}
+
+.ticket-header {
+    padding: 22px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #f4e8df, #fffaf5);
+    border-bottom: 2px solid #9b6a55;
+}
+
+.ticket-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ticket-brand img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+}
+
+.ticket-brand div {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-brand strong {
+    color: #694a3d;
+    font-size: 19px;
+    letter-spacing: 0.04em;
+}
+
+.ticket-brand span {
+    color: #9b796b;
+    font-size: 11px;
+}
+
+.ticket-number {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.ticket-number span {
+    color: #8b6a5c;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.ticket-number strong {
+    color: #694a3d;
+    font-size: 25px;
+}
+
+.ticket-client-data {
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 25px;
+    border-bottom: 1px solid #e4d7ce;
+}
+
+.ticket-client-data p {
+    margin: 0;
+    color: #72584d;
+    font-size: 12px;
+}
+
+.ticket-client-data p:nth-child(2) {
+    grid-column: 1 / -1;
+}
+
+.ticket-client-data strong {
+    color: #4e3931;
+}
+
+.ticket-table-wrapper {
+    overflow-x: auto;
+}
+
+.ticket-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+.ticket-table th {
+    padding: 11px 13px;
+    color: #60473c;
+    background: #f3e9e1;
+    border-bottom: 1px solid #d8c8bc;
+    text-align: left;
+}
+
+.ticket-table td {
+    padding: 12px 13px;
+    color: #604d45;
+    border-bottom: 1px solid #eee4dd;
+}
+
+.ticket-empty-row td {
+    padding: 30px;
+    color: #a28b80;
+    text-align: center;
+}
+
+.ticket-summary {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 45px;
+    background: #faf3ed;
+}
+
+.ticket-summary div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ticket-summary span {
+    color: #937569;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.ticket-summary strong {
+    color: #5f4034;
+    font-size: 18px;
+}
+
+.ticket-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.orders-history-panel {
+    padding-bottom: 0;
+    overflow: hidden;
+}
+
+.orders-history-wrapper {
+    margin-inline: -22px;
+}
+
+.orders-history-table {
+    min-width: 760px;
+}
+
+.orders-history-table th:first-child,
+.orders-history-table td:first-child {
+    padding-left: 22px;
+}
+
+.orders-history-table th:last-child,
+.orders-history-table td:last-child {
+    padding-right: 22px;
+}
+
+.order-number-cell {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.order-client-cell {
+    min-width: 170px;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.orders-table-footer {
+    min-height: 52px;
+    margin-inline: -22px;
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    background: var(--surface-soft);
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+}
+
+.order-view-dialog {
+    width: min(720px, calc(100% - 30px));
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.saved-order-view {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.saved-order-info {
+    padding: 15px;
+    background: var(--surface-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.saved-order-info p {
+    margin: 5px 0;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.saved-order-info strong {
+    color: var(--text-primary);
+}
+
+.saved-order-items {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+.saved-order-items th,
+.saved-order-items td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+
+.saved-order-total {
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+}
+
+.saved-order-total div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.saved-order-total span {
+    color: var(--text-secondary);
+    font-size: 10px;
+}
+
+.saved-order-total strong {
+    color: var(--primary);
+    font-size: 17px;
+}
+
+.order-search-box {
+    width: min(620px, 100%);
+}
+
+@media (max-width: 1050px) {
+    .order-item-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product-field {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 760px) {
+    .orders-heading {
+        align-items: stretch;
+    }
+
+    .order-number-heading {
+        width: 100%;
+    }
+
+    .order-data-grid,
+    .order-item-grid,
+    .item-calculation-preview {
+        grid-template-columns: 1fr;
+    }
+
+    .product-field,
+    .full-column {
+        grid-column: auto;
+    }
+
+    .order-item-actions,
+    .ticket-actions {
+        flex-direction: column;
+    }
+
+    .order-item-actions button,
+    .ticket-actions button {
+        width: 100%;
+    }
+
+    .ticket-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .ticket-number {
+        align-items: flex-start;
+    }
+
+    .ticket-client-data {
+        grid-template-columns: 1fr;
+    }
+
+    .ticket-client-data p:nth-child(2) {
+        grid-column: auto;
+    }
+
+    .ticket-summary {
+        justify-content: space-between;
+        gap: 15px;
+    }
+}
+
+@page {
+    size: A4;
+    margin: 15mm;
+}
+
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+
+    .order-ticket,
+    .order-ticket * {
+        visibility: visible !important;
+    }
+
+    .order-ticket {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        border: 1px solid #777;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .ticket-table-wrapper {
+        overflow: visible;
+    }
+
+    .ticket-table {
+        font-size: 10pt;
+    }
+
+    .ticket-header,
+    .ticket-summary {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+
+.ticket-company-meta {
+    display: block;
+    max-width: 420px;
+    margin-top: 3px;
+    color: var(--text-secondary);
+    font-size: 8px;
+    line-height: 1.35;
+}
+
+.ticket-company-meta[hidden] {
+    display: none;
+}

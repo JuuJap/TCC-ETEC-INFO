@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Painel administrativo da Velas S. Tomé"
+    >
+
+    <title>Velas S. Tomé | Painel</title>
+
+    <link
+        rel="icon"
+        href="../assets/img/Logo1.png"
+        type="image/png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/home.css?v=5"
+    >
+
+    <script src="../assets/js/backend-sync.js?v=5" defer></script>
+    <script src="../assets/js/common.js?v=5" defer></script>
+
+    <script
+        src="../assets/js/home.js?v=5"
+        defer
+    ></script>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- MENU LATERAL -->
+        <app-sidebar active="inicio"></app-sidebar>
+
+        <!-- ÁREA PRINCIPAL -->
+        <div class="main-shell">
+
+            <!-- CABEÇALHO -->
+            <app-topbar search-id="globalSearch" placeholder="Buscar atividades..." search-label="Buscar no painel"></app-topbar>
+
+            <!-- CONTEÚDO -->
+            <main class="content">
+
+                <section class="page-heading">
+
+                    <div>
+
+                        <span class="demo-badge">
+                            Painel administrativo
+                        </span>
+
+                        <h1>
+                            Olá, <span id="welcomeUser">Usuário</span>!
+                        </h1>
+
+                        <p>
+                            Acompanhe o resumo da sua empresa e acesse
+                            rapidamente as principais funções.
+                        </p>
+
+                    </div>
+
+                    <div class="current-date">
+
+                        <span>Hoje</span>
+
+                        <strong id="currentDate">
+                            Carregando...
+                        </strong>
+
+                    </div>
+
+                </section>
+
+                <!-- CARDS PRINCIPAIS -->
+                <section
+                    class="stats-grid home-stats-grid"
+                    aria-label="Resumo da empresa"
+                >
+
+                    <article class="stat-card">
+
+                        <div class="stat-card-header">
+
+                            <div class="stat-icon">
+                                C
+                            </div>
+
+                            <span
+                                class="stat-change neutral"
+                                data-change="clients"
+                            >
+                                0%
+                            </span>
+
+                        </div>
+
+                        <p>Clientes cadastrados</p>
+
+                        <strong data-stat="clients">
+                            0
+                        </strong>
+
+                        <small>
+                            Comparado ao mês anterior
+                        </small>
+
+                    </article>
+
+                    <article class="stat-card">
+
+                        <div class="stat-card-header">
+
+                            <div class="stat-icon">
+                                P
+                            </div>
+
+                            <span
+                                class="stat-change neutral"
+                                data-change="products"
+                            >
+                                0%
+                            </span>
+
+                        </div>
+
+                        <p>Produtos cadastrados</p>
+
+                        <strong data-stat="products">
+                            0
+                        </strong>
+
+                        <small>
+                            Itens disponíveis no sistema
+                        </small>
+
+                    </article>
+
+                    <article class="stat-card">
+
+                        <div class="stat-card-header">
+
+                            <div class="stat-icon">
+                                V
+                            </div>
+
+                            <span
+                                class="stat-change neutral"
+                                data-change="sales"
+                            >
+                                0%
+                            </span>
+
+                        </div>
+
+                        <p>Vendas realizadas</p>
+
+                        <strong data-stat="sales">
+                            0
+                        </strong>
+
+                        <small>
+                            Total registrado neste período
+                        </small>
+
+                    </article>
+
+                </section>
+
+                <div class="dashboard-grid">
+
+                    <!-- AÇÕES RÁPIDAS -->
+                    <section class="panel quick-actions-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <h2>Ações rápidas</h2>
+
+                                <p>
+                                    Cadastre e gerencie rapidamente
+                                    as informações da empresa.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="quick-actions">
+
+                            <button
+                                class="quick-action"
+                                type="button"
+                                data-action="client"
+                            >
+                                <span class="quick-action-icon">
+                                    +
+                                </span>
+
+                                <span>
+                                    <strong>Novo cliente</strong>
+                                    <small>Cadastrar cliente</small>
+                                </span>
+                            </button>
+
+                            <button
+                                class="quick-action"
+                                type="button"
+                                data-action="product"
+                            >
+                                <span class="quick-action-icon">
+                                    +
+                                </span>
+
+                                <span>
+                                    <strong>Novo produto</strong>
+                                    <small>Adicionar ao catálogo</small>
+                                </span>
+                            </button>
+
+                            <button
+                                class="quick-action"
+                                type="button"
+                                data-action="sale"
+                            >
+                                <span class="quick-action-icon">
+                                    +
+                                </span>
+
+                                <span>
+                                    <strong>Nova venda</strong>
+                                    <small>Registrar uma venda</small>
+                                </span>
+                            </button>
+
+                            <button
+                                class="quick-action"
+                                type="button"
+                                data-action="order"
+                            >
+                                <span class="quick-action-icon">
+                                    +
+                                </span>
+
+                                <span>
+                                    <strong>Novo pedido</strong>
+                                    <small>Registrar um pedido</small>
+                                </span>
+                            </button>
+</div>
+
+                    </section>
+
+                    <!-- DESEMPENHO -->
+                    <section class="panel performance-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <h2>Desempenho mensal</h2>
+
+                                <p>
+                                    Distribuição dos registros realizados neste mês.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="performance-list">
+
+                            <div class="performance-item">
+
+                                <div class="performance-label">
+                                    <span>Vendas</span>
+                                    <strong data-performance-value="sales">0%</strong>
+                                </div>
+
+                                <div class="progress-track">
+                                    <div
+                                        class="progress-bar"
+                                        data-performance-bar="sales"
+                                        style="--progress: 0%;"
+                                    ></div>
+                                </div>
+
+                            </div>
+
+                            <div class="performance-item">
+
+                                <div class="performance-label">
+                                    <span>Novos clientes</span>
+                                    <strong data-performance-value="clients">0%</strong>
+                                </div>
+
+                                <div class="progress-track">
+                                    <div
+                                        class="progress-bar"
+                                        data-performance-bar="clients"
+                                        style="--progress: 0%;"
+                                    ></div>
+                                </div>
+
+                            </div>
+
+                            <div class="performance-item">
+
+                                <div class="performance-label">
+                                    <span>Pedidos</span>
+                                    <strong data-performance-value="orders">0%</strong>
+                                </div>
+
+                                <div class="progress-track">
+                                    <div
+                                        class="progress-bar"
+                                        data-performance-bar="orders"
+                                        style="--progress: 0%;"
+                                    ></div>
+                                </div>
+
+                            </div>
+
+                            <div class="performance-item">
+
+                                <div class="performance-label">
+                                    <span>Produtos cadastrados</span>
+                                    <strong data-performance-value="products">0%</strong>
+                                </div>
+
+                                <div class="progress-track">
+                                    <div
+                                        class="progress-bar"
+                                        data-performance-bar="products"
+                                        style="--progress: 0%;"
+                                    ></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <!-- ATIVIDADES RECENTES -->
+                    <section class="panel activity-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <h2>Atividades recentes</h2>
+
+                                <p>
+                                    Últimas alterações feitas no sistema.
+                                </p>
+                            </div>
+
+                            <button
+                                class="secondary-button"
+                                id="clearActivitiesButton"
+                                type="button"
+                            >
+                                Limpar
+                            </button>
+
+                        </div>
+
+                        <div class="table-wrapper">
+
+                            <table class="activity-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Descrição</th>
+                                        <th>Categoria</th>
+                                        <th>Data</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="recentActivities">
+
+                                    <!-- Inserido pelo JavaScript -->
+
+                                </tbody>
+
+                            </table>
+
+                            <p
+                                class="empty-message"
+                                id="emptyActivities"
+                                hidden
+                            >
+                                Nenhuma atividade encontrada.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <!-- NOTIFICAÇÃO -->
+    <app-toast></app-toast>
+
+    <noscript>
+        <div class="noscript-message">
+            Ative o JavaScript para utilizar o painel.
+        </div>
+    </noscript>
+
+</body>
+
+</html>

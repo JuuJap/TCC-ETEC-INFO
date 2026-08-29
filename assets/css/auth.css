@@ -1,0 +1,1148 @@
+/* =========================================================
+   VELAS S. TOMÉ — LOGIN / CADASTRO
+========================================================= */
+
+:root {
+    --cream: #f4e9df;
+    --cream-strong: #fffaf5;
+
+    --brown-950: #160c09;
+    --brown-900: #21110d;
+    --brown-850: #2b1712;
+    --brown-800: #351d17;
+    --brown-700: #533126;
+
+    --terracotta: #a6533d;
+    --terracotta-hover: #bb674e;
+    --gold: #c69455;
+
+    --text: #f8eee7;
+    --text-soft: rgba(248, 238, 231, 0.68);
+
+    --line: rgba(255, 235, 220, 0.16);
+    --field: rgba(255, 250, 246, 0.96);
+    --field-border: rgba(71, 38, 29, 0.18);
+
+    --shadow:
+        0 30px 80px rgba(0, 0, 0, 0.40);
+
+    --radius-xl: 30px;
+    --radius-lg: 18px;
+    --radius-md: 13px;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    min-height: 100%;
+}
+
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    color: var(--text);
+
+    background:
+        var(--brown-950);
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   FUNDO
+========================================================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+
+    z-index: -3;
+
+    background:
+        url("../img/wall.gif")
+        center center /
+        cover
+        no-repeat;
+
+    transform: scale(1.02);
+}
+
+
+.background::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(15, 6, 4, 0.10) 0%,
+            rgba(15, 6, 4, 0.24) 43%,
+            rgba(15, 6, 4, 0.72) 58%,
+            rgba(15, 6, 4, 0.90) 100%
+        );
+}
+
+
+.background::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 25% 35%,
+            rgba(156, 47, 31, 0.10),
+            transparent 38%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.08),
+            rgba(0, 0, 0, 0.28)
+        );
+}
+
+
+/* =========================================================
+   LAYOUT PRINCIPAL
+========================================================= */
+
+.auth-shell {
+    min-height: 100vh;
+
+    display: grid;
+    grid-template-columns:
+        minmax(360px, 1fr)
+        minmax(520px, 0.95fr);
+}
+
+
+.brand-panel,
+.form-panel {
+    min-height: 100vh;
+
+    position: relative;
+}
+
+
+.brand-panel {
+    padding:
+        clamp(36px, 6vw, 78px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    isolation: isolate;
+}
+
+
+.brand-panel::after {
+    content: "";
+
+    position: absolute;
+    top: 8%;
+    right: 0;
+    bottom: 8%;
+
+    width: 1px;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(255, 231, 212, 0.16),
+            transparent
+        );
+}
+
+
+.brand-glow {
+    width: min(50vw, 520px);
+    height: min(50vw, 520px);
+
+    position: absolute;
+
+    z-index: -1;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(133, 30, 20, 0.18),
+            rgba(133, 30, 20, 0.05) 47%,
+            transparent 70%
+        );
+
+    filter: blur(8px);
+}
+
+
+.brand-logo {
+    width:
+        clamp(240px, 31vw, 410px);
+
+    max-width: 78%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 18px 35px rgba(0, 0, 0, 0.42));
+
+    animation:
+        logoFloat
+        6s
+        ease-in-out
+        infinite;
+}
+
+
+.brand-caption {
+    width: min(440px, 80%);
+
+    margin-top: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+}
+
+
+.brand-caption p {
+    flex: 0 1 auto;
+
+    color:
+        rgba(255, 239, 228, 0.66);
+
+    font-size:
+        clamp(9px, 0.9vw, 12px);
+
+    font-weight: 650;
+
+    letter-spacing: 0.07em;
+
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+.brand-line {
+    height: 1px;
+    flex: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(214, 166, 111, 0.54)
+        );
+}
+
+
+.brand-line:last-child {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(214, 166, 111, 0.54),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   PAINEL DO FORMULÁRIO
+========================================================= */
+
+.form-panel {
+    padding:
+        clamp(36px, 5vw, 72px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.form-panel::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: -1;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(17, 8, 6, 0.56),
+            rgba(17, 8, 6, 0.80)
+        );
+
+    backdrop-filter:
+        blur(7px);
+}
+
+
+.form-card {
+    width: min(100%, 470px);
+
+    padding:
+        clamp(30px, 4vw, 46px);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(45, 24, 18, 0.83),
+            rgba(24, 12, 9, 0.88)
+        );
+
+    border:
+        1px solid
+        rgba(255, 231, 214, 0.13);
+
+    border-radius:
+        var(--radius-xl);
+
+    box-shadow:
+        var(--shadow);
+
+    backdrop-filter:
+        blur(16px);
+
+    animation:
+        cardEnter
+        0.55s
+        cubic-bezier(.2, .8, .2, 1)
+        both;
+}
+
+
+.register-card {
+    width: min(100%, 490px);
+}
+
+
+.form-heading {
+    margin-bottom: 29px;
+}
+
+
+.eyebrow {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    color: var(--gold);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+}
+
+
+.form-heading h1 {
+    color:
+        var(--cream-strong);
+
+    font-size:
+        clamp(38px, 4.7vw, 62px);
+
+    font-weight: 800;
+
+    line-height: 0.98;
+
+    letter-spacing: -0.045em;
+}
+
+
+.form-heading p {
+    margin-top: 12px;
+
+    color:
+        var(--text-soft);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CAMPOS
+========================================================= */
+
+form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 19px;
+}
+
+
+.field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.field label {
+    color:
+        rgba(255, 241, 231, 0.82);
+
+    font-size: 11px;
+    font-weight: 750;
+
+    letter-spacing: 0.02em;
+}
+
+
+.input-wrap {
+    min-height: 58px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    background:
+        var(--field);
+
+    border:
+        1px solid
+        var(--field-border);
+
+    border-radius:
+        var(--radius-md);
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.12);
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.input-wrap:focus-within {
+    border-color:
+        rgba(180, 91, 64, 0.72);
+
+    box-shadow:
+        0 0 0 4px rgba(166, 83, 61, 0.14),
+        0 12px 28px rgba(0, 0, 0, 0.15);
+
+    transform:
+        translateY(-1px);
+}
+
+
+.input-icon {
+    width: 49px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color:
+        rgba(88, 48, 38, 0.55);
+
+    font-size: 9px;
+}
+
+
+.lock-icon {
+    font-size: 8px;
+
+    transform:
+        rotate(45deg);
+}
+
+
+.input-wrap input {
+    width: 100%;
+    height: 56px;
+
+    padding:
+        0 52px 0 0;
+
+    color:
+        #38231c;
+
+    background:
+        transparent;
+
+    border: none;
+    outline: none;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.input-wrap input::placeholder {
+    color:
+        rgba(75, 49, 41, 0.43);
+
+    font-weight: 500;
+}
+
+
+.password-toggle {
+    width: 43px;
+    height: 43px;
+
+    position: absolute;
+    right: 7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color:
+        rgba(84, 51, 40, 0.55);
+
+    background:
+        transparent;
+
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease;
+}
+
+
+.password-toggle:hover {
+    color:
+        var(--terracotta);
+
+    background:
+        rgba(166, 83, 61, 0.08);
+}
+
+
+.field-error {
+    min-height: 14px;
+
+    color:
+        #ffb19e;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   OPÇÕES
+========================================================= */
+
+.form-options {
+    margin-top: -5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+}
+
+
+.remember-option {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color:
+        var(--text-soft);
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+
+.remember-option input {
+    width: 15px;
+    height: 15px;
+
+    accent-color:
+        var(--terracotta);
+}
+
+
+.text-button {
+    color:
+        #d89a78;
+
+    background:
+        transparent;
+
+    border: none;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    text-decoration:
+        underline;
+
+    text-underline-offset: 3px;
+}
+
+
+.text-button:hover {
+    color:
+        #f2c0a3;
+}
+
+
+/* =========================================================
+   BOTÃO PRINCIPAL
+========================================================= */
+
+.primary-button {
+    min-height: 56px;
+
+    margin-top: 2px;
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--terracotta),
+            #7e3627
+        );
+
+    border:
+        1px solid
+        rgba(255, 211, 190, 0.13);
+
+    border-radius:
+        var(--radius-md);
+
+    box-shadow:
+        0 14px 30px rgba(104, 41, 27, 0.28);
+
+    font-size: 12px;
+    font-weight: 850;
+
+    letter-spacing: 0.05em;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+}
+
+
+.primary-button:hover {
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.08);
+
+    box-shadow:
+        0 18px 34px rgba(104, 41, 27, 0.36);
+}
+
+
+.primary-button:active {
+    transform:
+        translateY(0);
+}
+
+
+.button-arrow {
+    font-size: 18px;
+
+    line-height: 1;
+
+    transition:
+        transform 0.18s ease;
+}
+
+
+.primary-button:hover .button-arrow {
+    transform:
+        translateX(3px);
+}
+
+
+/* =========================================================
+   RODAPÉ DO FORMULÁRIO
+========================================================= */
+
+.form-divider {
+    margin: 24px 0 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.form-divider span {
+    height: 1px;
+    flex: 1;
+
+    background:
+        var(--line);
+}
+
+
+.form-divider small {
+    color:
+        rgba(255, 239, 228, 0.42);
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+}
+
+
+.switch-page {
+    color:
+        var(--text-soft);
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+
+.switch-page a {
+    margin-left: 4px;
+
+    color:
+        #e3a582;
+
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+
+.switch-page a:hover {
+    color:
+        #ffc5a4;
+
+    text-decoration:
+        underline;
+}
+
+
+.demo-note {
+    margin-top: 24px;
+
+    color:
+        rgba(255, 239, 228, 0.34);
+
+    font-size: 9px;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast {
+    max-width:
+        min(420px, calc(100vw - 34px));
+
+    min-height: 50px;
+
+    padding:
+        11px 17px;
+
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color:
+        #f9eee6;
+
+    background:
+        rgba(33, 17, 13, 0.94);
+
+    border:
+        1px solid
+        rgba(255, 231, 214, 0.13);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.33);
+
+    backdrop-filter:
+        blur(14px);
+
+    font-size: 11px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform:
+        translate(-50%, 16px);
+
+    transition:
+        opacity 0.22s ease,
+        transform 0.22s ease;
+}
+
+
+.toast.show {
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0);
+}
+
+
+.toast-mark {
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color:
+        #fff;
+
+    background:
+        var(--terracotta);
+
+    border-radius: 50%;
+
+    font-size: 11px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   ANIMAÇÕES
+========================================================= */
+
+@keyframes cardEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(18px)
+            scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+@keyframes logoFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-7px);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 920px) {
+
+    body {
+        overflow-y: auto;
+    }
+
+    .background::before {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(12, 5, 4, 0.22) 0%,
+                rgba(12, 5, 4, 0.45) 34%,
+                rgba(12, 5, 4, 0.90) 65%,
+                rgba(12, 5, 4, 0.96) 100%
+            );
+    }
+
+    .auth-shell {
+        min-height: 100vh;
+
+        grid-template-columns: 1fr;
+    }
+
+    .brand-panel {
+        min-height: 35vh;
+
+        padding:
+            32px 24px 12px;
+
+        justify-content:
+            flex-end;
+    }
+
+    .brand-panel::after {
+        display: none;
+    }
+
+    .brand-logo {
+        width:
+            clamp(170px, 45vw, 250px);
+    }
+
+    .brand-caption {
+        display: none;
+    }
+
+    .form-panel {
+        min-height: 65vh;
+
+        padding:
+            18px 20px 38px;
+
+        align-items:
+            flex-start;
+    }
+
+    .form-panel::before {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(21, 10, 8, 0.28),
+                rgba(21, 10, 8, 0.70)
+            );
+    }
+
+    .form-card {
+        width: min(100%, 520px);
+
+        margin-inline: auto;
+
+        padding:
+            29px 25px;
+
+        border-radius:
+            24px;
+    }
+
+    .form-heading h1 {
+        font-size:
+            clamp(38px, 11vw, 52px);
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .form-options {
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+    .text-button {
+        align-self:
+            flex-end;
+    }
+
+    .form-card {
+        padding:
+            26px 20px;
+    }
+
+    .input-wrap {
+        min-height: 54px;
+    }
+
+    .input-wrap input {
+        height: 52px;
+    }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+button,
+a,
+input {
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline:
+        2px solid
+        #e5a67f;
+
+    outline-offset:
+        3px;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
+
+        transition-duration:
+            0.01ms !important;
+    }
+
+}
+
+
+/* =========================================================
+   ESTADOS DE AUTENTICAÇÃO
+========================================================= */
+
+.input-wrap.has-error {
+    border-color: rgba(235, 116, 92, 0.86);
+
+    box-shadow:
+        0 0 0 4px rgba(235, 116, 92, 0.12),
+        0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.input-wrap.has-error .input-icon {
+    color: #b64c3c;
+}
+
+.primary-button:disabled {
+    cursor: wait;
+    opacity: 0.72;
+    transform: none;
+    filter: none;
+}
+
+.primary-button.is-loading .button-arrow {
+    animation:
+        authArrowPulse
+        0.8s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+.auth-status {
+    min-height: 14px;
+
+    margin-top: 10px;
+
+    color: var(--text-soft);
+
+    font-size: 10px;
+
+    line-height: 1.45;
+
+    text-align: center;
+}
+
+.auth-status[hidden] {
+    display: none;
+}
+
+@keyframes authArrowPulse {
+
+    from {
+        transform: translateX(0);
+        opacity: 0.55;
+    }
+
+    to {
+        transform: translateX(4px);
+        opacity: 1;
+    }
+
+}

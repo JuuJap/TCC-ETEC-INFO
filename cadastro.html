@@ -1,46 +1,195 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velas São Tomé | Criar Conta</title>
-    <link rel="stylesheet" href="css/main.css">
+    <meta
+        name="description"
+        content="Criação de conta no sistema de gerenciamento da Velas S. Tomé."
+    >
+
+    <title>Velas S. Tomé | Criar conta</title>
+
+    <link rel="icon" href="assets/img/Logo1.png" type="image/png">
+    <link rel="stylesheet" href="assets/css/auth.css">
+
+    <script src="assets/js/auth.js?v=3" defer></script>
 </head>
-<body>
-    <div class="background"></div>
 
-    <header class="header">
-<h1 class="logo">
-    <img src="img/Logo1.png" alt="Logo Velas S. Tomé">
-    <span>Velas S. Tomé</span>
-</h1>
+<body class="auth-page" data-page="register">
 
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+    <div class="background" aria-hidden="true"></div>
 
-        <nav>
-            <a href="#">Contato</a>
-            <a href="index.html">Login</a>
-            <button id="theme-toggle" type="button" onclick="toggleTheme()">
-                <span class="icon">🌙</span>
-            </button>
-        </nav>
-    </header>
+    <main class="auth-shell">
 
-    <main>
-<div class="login-container">
-    <h2>Criar Conta</h2>
-    <input id="cadastro-usuario" type="text" placeholder="Usuário">
-    <input id="cadastro-senha" type="password" placeholder="Senha">
-    <input id="confirmar-senha" type="password" placeholder="Confirmar senha">
-    <button type="button" onclick="criarConta()">Cadastrar</button>
-    <a href="index.html" class="forgot-password">Já tenho conta</a>
-</div>
+        <section class="brand-panel" aria-label="Velas S. Tomé">
+
+            <div class="brand-glow" aria-hidden="true"></div>
+
+            <img
+                src="assets/img/Logo1.png"
+                class="brand-logo"
+                alt="Logo da Velas S. Tomé"
+            >
+
+            <div class="brand-caption">
+                <span class="brand-line"></span>
+                <p>Sistema de gerenciamento empresarial</p>
+                <span class="brand-line"></span>
+            </div>
+
+        </section>
+
+
+        <section class="form-panel">
+
+            <div class="form-card register-card">
+
+                <div class="form-heading">
+                    <span class="eyebrow">Primeiro acesso</span>
+                    <h1>Criar conta</h1>
+                    <p>Preencha os dados abaixo para continuar.</p>
+                </div>
+
+                <form id="registerForm" novalidate>
+
+                    <div class="field">
+                        <label for="registerUser">Usuário</label>
+
+                        <div class="input-wrap">
+                            <span class="input-icon" aria-hidden="true">●</span>
+
+                            <input
+                                id="registerUser"
+                                name="usuario"
+                                type="text"
+                                placeholder="Escolha um nome de usuário"
+                                autocomplete="username"
+                                minlength="3"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <small
+                            class="field-error"
+                            data-error-for="registerUser"
+                            aria-live="polite"
+                        ></small>
+                    </div>
+
+
+                    <div class="field">
+                        <label for="registerPassword">Senha</label>
+
+                        <div class="input-wrap">
+                            <span class="input-icon lock-icon" aria-hidden="true">◆</span>
+
+                            <input
+                                id="registerPassword"
+                                name="senha"
+                                type="password"
+                                placeholder="Crie uma senha"
+                                autocomplete="new-password"
+                                minlength="8"
+                                required
+                            >
+
+                            <button
+                                class="password-toggle"
+                                type="button"
+                                data-toggle-password="registerPassword"
+                                aria-label="Mostrar senha"
+                            >
+                                <span aria-hidden="true">◉</span>
+                            </button>
+                        </div>
+
+                        <small
+                            class="field-error"
+                            data-error-for="registerPassword"
+                            aria-live="polite"
+                        ></small>
+                    </div>
+
+
+                    <div class="field">
+                        <label for="registerConfirm">Confirmar senha</label>
+
+                        <div class="input-wrap">
+                            <span class="input-icon lock-icon" aria-hidden="true">◆</span>
+
+                            <input
+                                id="registerConfirm"
+                                name="confirmacao"
+                                type="password"
+                                placeholder="Digite a senha novamente"
+                                autocomplete="new-password"
+                                minlength="8"
+                                required
+                            >
+
+                            <button
+                                class="password-toggle"
+                                type="button"
+                                data-toggle-password="registerConfirm"
+                                aria-label="Mostrar senha"
+                            >
+                                <span aria-hidden="true">◉</span>
+                            </button>
+                        </div>
+
+                        <small
+                            class="field-error"
+                            data-error-for="registerConfirm"
+                            aria-live="polite"
+                        ></small>
+                    </div>
+
+
+                    <button
+                        class="primary-button"
+                        id="registerSubmit"
+                        type="submit"
+                    >
+                        <span class="button-label">Criar conta</span>
+                        <span class="button-arrow" aria-hidden="true">→</span>
+                    </button>
+
+                    <p
+                        class="auth-status"
+                        id="registerStatus"
+                        role="status"
+                        aria-live="polite"
+                        hidden
+                    ></p>
+
+                </form>
+
+
+                <div class="form-divider">
+                    <span></span>
+                    <small>ou</small>
+                    <span></span>
+                </div>
+
+
+                <p class="switch-page">
+                    Já possui uma conta?
+                    <a href="index.html">Entrar</a>
+                </p>
+
+            </div>
+
+        </section>
+
     </main>
 
-    <script src="js/script.js"></script>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <span class="toast-mark" aria-hidden="true">✓</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
 </body>
 </html>

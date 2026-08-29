@@ -1,45 +1,169 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velas São Tomé | Login</title>
-    <link rel="stylesheet" href="css/main.css">
+    <meta
+        name="description"
+        content="Acesso ao sistema de gerenciamento da Velas S. Tomé."
+    >
+
+    <title>Velas S. Tomé | Entrar</title>
+
+    <link rel="icon" href="assets/img/Logo1.png" type="image/png">
+    <link rel="stylesheet" href="assets/css/auth.css">
+
+    <script src="assets/js/auth.js?v=3" defer></script>
 </head>
-<body>
-    <div class="background"></div>
 
-    <header class="header">
-<h1 class="logo">
-    <img src="img/Logo1.png" alt="Logo Velas S. Tomé">
-    <span>Velas S. Tomé</span>
-</h1>
+<body class="auth-page" data-page="login">
 
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+    <div class="background" aria-hidden="true"></div>
 
-        <nav>
-            <a href="#">Contato</a>
-            <a href="cadastro.html">Criar conta</a>
-            <button id="theme-toggle" type="button" onclick="toggleTheme()">
-                <span class="icon">🌙</span>
-            </button>
-        </nav>
-    </header>
+    <main class="auth-shell">
 
-    <main>
-        <div class="login-container">
-    <h2>Entrar</h2>
-    <input id="login-usuario" type="text" placeholder="Usuário">
-    <input id="login-senha" type="password" placeholder="Senha">
-    <button type="button" onclick="entrar()">Entrar</button>
-    <a href="#" class="forgot-password">Esqueci minha senha</a>
-</div>
+        <section class="brand-panel" aria-label="Velas S. Tomé">
+
+            <div class="brand-glow" aria-hidden="true"></div>
+
+            <img
+                src="assets/img/Logo1.png"
+                class="brand-logo"
+                alt="Logo da Velas S. Tomé"
+            >
+
+            <div class="brand-caption">
+                <span class="brand-line"></span>
+                <p>Sistema de gerenciamento empresarial</p>
+                <span class="brand-line"></span>
+            </div>
+
+        </section>
+
+
+        <section class="form-panel">
+
+            <div class="form-card">
+
+                <div class="form-heading">
+                    <span class="eyebrow">Bem-vindo de volta</span>
+                    <h1>Entrar</h1>
+                    <p>Acesse sua conta para continuar.</p>
+                </div>
+
+                <form id="loginForm" novalidate>
+
+                    <div class="field">
+                        <label for="loginUser">Usuário</label>
+
+                        <div class="input-wrap">
+                            <span class="input-icon" aria-hidden="true">●</span>
+
+                            <input
+                                id="loginUser"
+                                name="usuario"
+                                type="text"
+                                placeholder="Digite seu usuário"
+                                autocomplete="username"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <small
+                            class="field-error"
+                            data-error-for="loginUser"
+                            aria-live="polite"
+                        ></small>
+                    </div>
+
+
+                    <div class="field">
+                        <label for="loginPassword">Senha</label>
+
+                        <div class="input-wrap">
+                            <span class="input-icon lock-icon" aria-hidden="true">◆</span>
+
+                            <input
+                                id="loginPassword"
+                                name="senha"
+                                type="password"
+                                placeholder="Digite sua senha"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                class="password-toggle"
+                                type="button"
+                                data-toggle-password="loginPassword"
+                                aria-label="Mostrar senha"
+                            >
+                                <span aria-hidden="true">◉</span>
+                            </button>
+                        </div>
+
+                        <small
+                            class="field-error"
+                            data-error-for="loginPassword"
+                            aria-live="polite"
+                        ></small>
+                    </div>
+
+
+                    <div class="form-options">
+
+                        <label class="remember-option">
+                            <input type="checkbox" id="rememberUser">
+                            <span>Lembrar usuário</span>
+                        </label>
+
+                    </div>
+
+
+                    <button
+                        class="primary-button"
+                        id="loginSubmit"
+                        type="submit"
+                    >
+                        <span class="button-label">Entrar</span>
+                        <span class="button-arrow" aria-hidden="true">→</span>
+                    </button>
+
+                    <p
+                        class="auth-status"
+                        id="loginStatus"
+                        role="status"
+                        aria-live="polite"
+                        hidden
+                    ></p>
+
+                </form>
+
+
+                <div class="form-divider">
+                    <span></span>
+                    <small>ou</small>
+                    <span></span>
+                </div>
+
+
+                <p class="switch-page">
+                    Ainda não possui uma conta?
+                    <a href="cadastro.html">Criar conta</a>
+                </p>
+
+            </div>
+
+        </section>
+
     </main>
 
-    <script src="js/script.js"></script>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <span class="toast-mark" aria-hidden="true">✓</span>
+        <span id="toastMessage">Mensagem</span>
+    </div>
+
 </body>
 </html>
