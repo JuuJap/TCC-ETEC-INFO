@@ -1,83 +1,181 @@
-# Velas S. Tomé — Sistema de Gerenciamento
+# Velas S. Tomé — ERP de Pequeno Porte
 
-Sistema web full-stack desenvolvido como Trabalho de Conclusão de Curso (TCC) para apoiar o gerenciamento interno da **Velas S. Tomé**.
+Sistema web full-stack desenvolvido como Trabalho de Conclusão de Curso (TCC) com o objetivo de centralizar e integrar processos administrativos da **Velas S. Tomé** em uma única aplicação.
 
-A aplicação reúne autenticação, clientes, produtos, vendas, pedidos, Controle Geral, dashboard e configurações da empresa em uma única interface responsiva. A versão atual foi pensada principalmente para **uso local em uma única máquina com XAMPP**, utilizando PHP e MySQL.
+O projeto foi concebido como um **ERP de pequeno porte**, direcionado ao contexto de uma pequena empresa. Seu foco é reunir, em uma mesma base de dados, informações de clientes, produtos, vendas, pedidos, movimentações financeiras, controle de peso, usuários e configurações da empresa.
+
+A proposta não é reproduzir todos os módulos encontrados em grandes ERPs comerciais, mas aplicar os principais conceitos de um sistema integrado de gestão empresarial dentro do escopo real do negócio.
 
 ---
 
-## Visão geral
+# Visão geral
 
-O projeto utiliza:
+O Velas S. Tomé funciona como um sistema integrado:
 
-- **HTML5** para a estrutura das páginas;
-- **CSS3** para identidade visual, responsividade e temas;
-- **JavaScript** para interação, validações e lógica do front-end;
-- **PHP 8+** para autenticação, sincronização e regras do servidor;
-- **MySQL/MariaDB** para persistência;
-- **PDO** com prepared statements para acesso ao banco;
-- **sessionStorage/localStorage** como camada de estado do navegador integrada ao MySQL;
-- **Web Components** para elementos compartilhados do painel.
+```text
+Clientes ───────┐
+                ├────► Pedidos ─────► Controle Geral
+Produtos ───────┘          │
+                           ├────► Valor
+                           └────► Peso
 
-Fluxo principal:
+Vendas ───────────────────► Controle Geral
+
+Todos os módulos ─────────► Dashboard / Atividades
+
+Configurações ────────────► Empresa / Aparência / Segurança
+```
+
+A integração entre os módulos é um dos principais elementos que caracterizam o projeto como um ERP.
+
+Uma informação cadastrada em um módulo pode ser reutilizada por outros módulos, evitando repetição manual de dados e mantendo os registros centralizados no mesmo banco MySQL.
+
+---
+
+# Objetivo
+
+O sistema tem como objetivo auxiliar no gerenciamento interno de uma pequena empresa, oferecendo uma solução simples e integrada para:
+
+- centralizar dados administrativos;
+- cadastrar e consultar clientes;
+- manter um catálogo de produtos;
+- registrar vendas;
+- elaborar pedidos;
+- acompanhar entradas e saídas financeiras;
+- acompanhar entradas e saídas de peso;
+- gerar informações resumidas no dashboard;
+- registrar atividades realizadas no sistema;
+- manter dados da empresa;
+- controlar acesso através de contas de usuário.
+
+O projeto foi desenvolvido principalmente para **uso local em uma única máquina**, utilizando XAMPP, PHP e MySQL.
+
+---
+
+# Conceito de ERP aplicado ao projeto
+
+ERP significa **Enterprise Resource Planning**, ou Planejamento dos Recursos Empresariais.
+
+No contexto deste projeto, o conceito é aplicado principalmente através da integração entre diferentes áreas da gestão.
+
+Exemplos:
+
+```text
+Cliente cadastrado
+        ↓
+Pode ser selecionado em um Pedido
+        ↓
+Endereço é preenchido automaticamente
+```
+
+```text
+Produto cadastrado
+        ↓
+Pode ser selecionado em um Pedido
+        ↓
+Valor e peso podem ser reutilizados
+```
+
+```text
+Pedido salvo
+        ↓
+Gera entrada financeira
+        +
+Gera saída de peso
+        ↓
+Controle Geral
+```
+
+```text
+Venda registrada
+        ↓
+Gera entrada financeira
+        ↓
+Controle Geral
+```
+
+Assim, os módulos não funcionam apenas como páginas independentes: eles compartilham dados e participam do mesmo fluxo administrativo.
+
+---
+
+# Tecnologias utilizadas
+
+## Front-end
+
+- HTML5;
+- CSS3;
+- JavaScript;
+- Web Components;
+- `sessionStorage`;
+- `localStorage`;
+- File System Access API quando disponível;
+- API de impressão do navegador.
+
+## Back-end
+
+- PHP 8+;
+- sessões PHP;
+- APIs JSON;
+- PDO;
+- prepared statements.
+
+## Banco de dados
+
+- MySQL ou MariaDB;
+- tabelas relacionais;
+- chaves estrangeiras;
+- índices;
+- views;
+- triggers;
+- constraints.
+
+## Ambiente recomendado
+
+- XAMPP;
+- Apache;
+- MySQL/MariaDB;
+- navegador moderno.
+
+---
+
+# Arquitetura
+
+Fluxo simplificado da aplicação:
 
 ```text
 Navegador
    │
-   ├── HTML / CSS / JavaScript
-   │
-   ▼
-backend-sync.js / APIs PHP
-   │
-   ▼
-MySQL
+   ├── HTML
+   ├── CSS
+   └── JavaScript
+          │
+          ▼
+ assets/js/backend-sync.js
+          │
+          ▼
+     APIs PHP
+          │
+          ▼
+        MySQL
 ```
 
-A versão atual não depende de Live Server. O projeto deve ser executado pelo Apache/PHP do XAMPP.
+A aplicação utiliza PHP como camada de servidor e MySQL para persistência definitiva dos dados.
 
----
-
-## Estado atual
-
-O sistema possui front-end, PHP e MySQL integrados e utiliza dados reais do banco.
-
-O arquivo SQL de instalação cria apenas a **estrutura vazia** do sistema. Ele não cria usuário de teste e não insere clientes, produtos, vendas, pedidos ou outras informações iniciais.
-
-Na primeira utilização:
-
-1. importe o banco;
-2. abra o sistema;
-3. clique em **Criar conta**;
-4. cadastre o primeiro usuário;
-5. faça login normalmente.
-
----
-
-## Requisitos
-
-Para executar localmente:
-
-- Windows, Linux ou macOS;
-- XAMPP ou ambiente equivalente com:
-  - Apache;
-  - PHP 8 ou superior;
-  - MySQL/MariaDB;
-  - extensão PDO MySQL habilitada;
-- navegador moderno, preferencialmente Chrome, Edge ou Firefox.
+O JavaScript continua responsável pela interação da interface, validações e comportamento das páginas.
 
 ---
 
 # Instalação com XAMPP
 
-## 1. Coloque o projeto no `htdocs`
+## 1. Copie o projeto para o `htdocs`
 
-Extraia/copiei a pasta do projeto para:
+Coloque a pasta do projeto em:
 
 ```text
 C:\xampp\htdocs\tcc\
 ```
 
-A raiz deve ficar semelhante a:
+A estrutura principal deverá ser semelhante a:
 
 ```text
 tcc/
@@ -92,16 +190,16 @@ tcc/
 └── tools/
 ```
 
-## 2. Inicie os serviços
+## 2. Inicie o XAMPP
 
-Abra o XAMPP e inicie:
+Abra o XAMPP Control Panel e inicie:
 
 ```text
 Apache
 MySQL
 ```
 
-## 3. Importe o banco
+## 3. Importe o banco de dados
 
 Abra:
 
@@ -111,7 +209,7 @@ http://localhost/phpmyadmin/
 
 No phpMyAdmin:
 
-1. abra a opção **Importar**;
+1. escolha **Importar**;
 2. selecione:
 
 ```text
@@ -120,17 +218,17 @@ database/CriarBanco.sql
 
 3. execute a importação.
 
-O próprio SQL cria:
+O próprio arquivo cria o banco:
 
 ```text
 velas_s_tome
 ```
 
-Não é necessário criar o banco manualmente antes.
+Não é necessário criar o banco manualmente.
 
-> Atenção: o SQL recria as estruturas do sistema. Caso já existam dados importantes no banco `velas_s_tome`, faça backup antes de importar novamente.
+> O arquivo SQL cria a estrutura do sistema sem inserir usuários, clientes, produtos, vendas, pedidos ou outros registros iniciais.
 
-## 4. Abra o site
+## 4. Abra o sistema
 
 Acesse:
 
@@ -138,13 +236,13 @@ Acesse:
 http://localhost/tcc/
 ```
 
-Não utilize Live Server na versão integrada, porque login, sessão e persistência dependem do Apache/PHP.
+Esta versão não deve ser executada pelo Live Server, pois autenticação, sessões e persistência dependem do Apache/PHP.
 
 ## 5. Crie a primeira conta
 
-O banco inicia sem usuários.
+O banco é criado sem usuários.
 
-Na tela inicial, escolha:
+Na tela inicial:
 
 ```text
 Criar conta
@@ -157,13 +255,13 @@ Usuário: mínimo de 3 caracteres
 Senha: mínimo de 8 caracteres
 ```
 
-Depois do cadastro, volte ao login e acesse o sistema.
+Depois do cadastro, faça login normalmente.
 
 ---
 
-## URLs úteis
+# URLs úteis
 
-| Recurso | URL |
+| Recurso | Endereço |
 |---|---|
 | Sistema | `http://localhost/tcc/` |
 | Cadastro | `http://localhost/tcc/cadastro.html` |
@@ -172,58 +270,56 @@ Depois do cadastro, volte ao login e acesse o sistema.
 
 ---
 
-# Funcionalidades
+# Módulos do ERP
 
-## Autenticação
+## 1. Autenticação
 
-O sistema possui autenticação real ligada ao MySQL.
+O sistema possui autenticação integrada ao MySQL.
 
 Funcionalidades:
 
-- cadastro de usuários;
+- criação de contas;
 - login por usuário e senha;
-- senha armazenada com `password_hash()`;
-- validação com `password_verify()`;
 - sessão PHP;
-- regeneração do identificador da sessão após login;
-- alteração de senha em **Configurações > Conta e segurança**;
-- opção **Lembrar usuário**, que armazena apenas o nome do usuário no navegador;
-- verificação de sessão existente;
-- redirecionamento automático para a Home quando o usuário já está autenticado;
-- logout real no servidor;
-- limite de tentativas consecutivas de login;
-- expiração da sessão após longo período sem atividade.
+- logout no servidor;
+- alteração de senha;
+- verificação automática da sessão;
+- redirecionamento para a Home após autenticação;
+- opção de lembrar apenas o nome do usuário;
+- limite de tentativas consecutivas de login.
 
-Não existe recuperação de senha por e-mail porque a tabela de usuários não possui um e-mail ou outro canal de recuperação vinculado à autenticação.
+As senhas são armazenadas através de `password_hash()` e verificadas com `password_verify()`.
+
+O sistema não armazena senhas em texto puro.
 
 ---
 
-## Home / Dashboard
+## 2. Home / Dashboard
 
-A Home utiliza dados reais do sistema.
+A Home funciona como painel inicial do ERP.
 
-Exibe:
+Exibe dados reais cadastrados no sistema:
 
 - quantidade de clientes;
 - quantidade de produtos;
 - quantidade de vendas;
 - variação mensal;
-- distribuição dos registros do mês;
+- distribuição de registros do mês;
 - data atual;
 - ações rápidas;
 - atividades recentes.
 
-Os percentuais dos cards não são valores fixos.
+Os percentuais não são valores fixos.
 
-A variação é calculada utilizando os registros do mês atual em comparação ao mês anterior.
+A variação dos cards é calculada com base nos registros do mês atual em comparação ao mês anterior.
 
-Quando não existem dados, os indicadores permanecem em:
+Quando não existem dados:
 
 ```text
 0%
 ```
 
-O painel mensal utiliza os registros reais de:
+O painel mensal utiliza registros reais de:
 
 - vendas;
 - novos clientes;
@@ -232,12 +328,12 @@ O painel mensal utiliza os registros reais de:
 
 ---
 
-## Clientes
+## 3. Clientes
 
-O módulo Clientes permite:
+O módulo de Clientes permite:
 
-- cadastrar;
-- editar;
+- cadastrar clientes;
+- editar cadastros;
 - excluir;
 - pesquisar;
 - filtrar;
@@ -254,20 +350,33 @@ Cidade
 Status
 ```
 
-Status:
+Status possíveis:
 
 ```text
 Ativo
 Inativo
 ```
 
-Ao selecionar um cliente cadastrado em Pedidos, endereço e cidade podem ser preenchidos automaticamente.
+### Integração com Pedidos
+
+Clientes cadastrados podem ser selecionados durante a criação de pedidos.
+
+Ao selecionar um cliente, o sistema pode preencher automaticamente:
+
+```text
+Endereço
+Cidade
+```
+
+reduzindo a necessidade de digitação repetida.
 
 ---
 
-## Produtos
+## 4. Produtos
 
-O módulo Produtos permite:
+O módulo de Produtos funciona como catálogo utilizado pelo ERP.
+
+Permite:
 
 - cadastrar;
 - editar;
@@ -288,18 +397,30 @@ Peso unitário
 
 Regras:
 
-- o valor unitário do produto é opcional;
-- o peso unitário é obrigatório;
-- valor e peso aceitam casas decimais;
-- dados cadastrados podem ser preenchidos automaticamente em Pedidos.
+- valor unitário é opcional;
+- peso unitário é obrigatório;
+- valor aceita casas decimais;
+- peso aceita casas decimais.
+
+### Integração com Pedidos
+
+Ao selecionar um produto cadastrado em um Pedido, o sistema pode preencher automaticamente:
+
+```text
+Descrição
+Valor unitário
+Peso unitário
+```
+
+O usuário ainda pode ajustar os valores durante a montagem do pedido quando necessário.
 
 ---
 
-## Vendas
+## 5. Vendas
 
-O módulo Vendas registra operações independentes dos Pedidos.
+O módulo Vendas registra operações comerciais independentes dos Pedidos.
 
-Informações principais:
+Campos principais:
 
 ```text
 Cliente / descrição
@@ -307,51 +428,68 @@ Valor
 Data e hora
 ```
 
-Ao registrar uma venda, o banco cria automaticamente a movimentação correspondente no **Controle Geral** como entrada financeira.
+### Integração com Controle Geral
+
+Ao registrar uma venda:
+
+```text
+Venda
+  ↓
+Entrada financeira
+  ↓
+Controle Geral
+```
+
+O banco utiliza triggers para manter essa integração.
 
 Venda não movimenta peso automaticamente.
 
 ---
 
-## Pedidos
+## 6. Pedidos
 
-O módulo Pedidos é responsável pela criação e manutenção dos pedidos da empresa.
+Pedidos é um dos principais módulos do ERP.
 
-Funcionalidades:
+Permite:
 
 - numeração sequencial;
-- cliente cadastrado ou digitado manualmente;
+- seleção de cliente cadastrado;
+- cliente digitado manualmente;
 - preenchimento automático de endereço;
-- seleção de produtos;
+- seleção de produtos cadastrados;
 - preenchimento automático de valor e peso;
 - vários itens no mesmo pedido;
-- quantidade;
+- definição de quantidade;
 - valores decimais;
 - pesos decimais;
-- cálculo do total por item;
-- cálculo do valor total do pedido;
+- cálculo automático por item;
+- cálculo do valor total;
 - cálculo do peso total;
 - edição de itens;
-- remoção de itens;
-- salvar;
+- exclusão de itens;
+- salvar pedido;
 - visualizar;
 - editar;
 - excluir;
 - pesquisar no histórico;
-- baixar em `.txt`;
+- baixar pedido em `.txt`;
 - imprimir;
 - salvar como PDF através do navegador.
 
-Quando os dados da empresa estão configurados, o pedido pode utilizar:
+### Dados da empresa
 
-- nome da empresa;
-- telefone;
-- endereço;
-- CNPJ.
+Quando configurados, os documentos podem utilizar:
+
+```text
+Nome da empresa
+Telefone
+Endereço
+CNPJ
+```
 
 ### Integração com Controle Geral
 
-Um pedido representa:
+Um Pedido salvo representa:
 
 ```text
 Entrada financeira
@@ -359,43 +497,63 @@ Entrada financeira
 Saída de peso
 ```
 
-Ao alterar o pedido, a movimentação vinculada é atualizada.
+Fluxo:
 
-Ao excluir o pedido, a movimentação correspondente também é removida.
+```text
+Pedido
+  │
+  ├────► Valor total ─────► Entrada financeira
+  │
+  └────► Peso total ──────► Saída de peso
+                              │
+                              ▼
+                        Controle Geral
+```
+
+Quando o pedido é alterado, sua movimentação vinculada também é atualizada.
+
+Quando o pedido é excluído, a movimentação vinculada é removida.
 
 ---
 
-## Controle Geral
+## 7. Controle Geral
 
-O módulo é exibido na interface como **Controle Geral**.
+O módulo exibido na interface como **Controle Geral** reúne dois controles administrativos.
 
-Alguns arquivos ainda utilizam o nome `financeiro` internamente por compatibilidade histórica.
-
-Existem dois controles paralelos:
+### Controle financeiro
 
 ```text
-FINANCEIRO
-├── Entradas
-├── Saídas
-└── Saldo
+Entradas
+Saídas
+Saldo
+```
 
-PESO
-├── Entradas
-├── Saídas
-└── Saldo
+### Controle de peso
+
+```text
+Entradas
+Saídas
+Saldo
 ```
 
 Uma movimentação manual pode conter:
 
 - somente valor;
 - somente peso;
-- valor e peso.
+- valor e peso ao mesmo tempo.
 
-O histórico também recebe movimentações automáticas de Vendas e Pedidos.
+O histórico também recebe movimentações automáticas provenientes de:
+
+```text
+Vendas
+Pedidos
+```
+
+Alguns arquivos ainda utilizam o nome `financeiro` internamente por compatibilidade com versões anteriores do projeto.
 
 ---
 
-## Configurações
+## 8. Configurações
 
 ### Aparência
 
@@ -407,11 +565,11 @@ Escuro
 Automático
 ```
 
-Quando ainda não existe preferência salva, o painel inicia em tema escuro.
+Quando ainda não existe preferência registrada, o sistema inicia no tema escuro.
 
 ### Dados da empresa
 
-Campos:
+Permite definir:
 
 ```text
 Nome
@@ -420,13 +578,13 @@ Endereço
 CNPJ
 ```
 
-As informações ficam persistidas no MySQL.
+Essas informações são persistidas no MySQL.
 
-O nome também pode aparecer na interface e os dados podem ser utilizados nos documentos de Pedido.
+Podem ser utilizadas na interface e nos documentos de Pedido.
 
 ### Conta e segurança
 
-Permite alterar a senha da conta conectada.
+O usuário autenticado pode alterar sua senha.
 
 É necessário informar:
 
@@ -436,9 +594,9 @@ Permite alterar a senha da conta conectada.
 
 A nova senha deve possuir pelo menos 8 caracteres.
 
-### Dados do sistema
+### Resumo do sistema
 
-Exibe as quantidades de:
+A página exibe as quantidades atuais de:
 
 - clientes;
 - produtos;
@@ -449,13 +607,13 @@ Exibe as quantidades de:
 
 #### Restaurar dados de exemplo
 
-Substitui os registros operacionais atuais por um conjunto de dados criado para apresentação/testes.
+Cria registros preparados para demonstração do ERP.
 
-Essa operação não acontece automaticamente na instalação.
+Essa operação é opcional e não ocorre durante a instalação.
 
 #### Limpar dados do sistema
 
-Remove:
+Remove dados operacionais:
 
 - clientes;
 - produtos;
@@ -471,13 +629,21 @@ Preserva:
 - preferência de tema;
 - dados da empresa.
 
-A operação possui duas confirmações antes da exclusão.
+A operação exige duas confirmações.
+
+---
+
+# Atividades
+
+O ERP registra atividades administrativas para alimentar o histórico da Home.
+
+As atividades ajudam a visualizar ações recentes realizadas no sistema e estão associadas ao usuário responsável quando aplicável.
 
 ---
 
 # Diálogos e notificações
 
-O sistema não utiliza caixas nativas do navegador como:
+O sistema não depende das caixas nativas do navegador:
 
 ```javascript
 alert()
@@ -485,23 +651,43 @@ confirm()
 prompt()
 ```
 
-Ações que precisam de confirmação utilizam modais internos do próprio sistema.
+Foram implementados componentes próprios.
 
-Notificações comuns utilizam toasts.
+### Toasts
 
-Isso mantém o comportamento visual consistente com o restante da aplicação.
+Utilizados para mensagens rápidas, como:
+
+```text
+Cadastro salvo
+Operação concluída
+Alteração realizada
+```
+
+### Modais de confirmação
+
+Utilizados para ações que exigem decisão do usuário, como:
+
+- logout;
+- exclusão de cliente;
+- exclusão de produto;
+- exclusão de pedido;
+- limpeza de atividades;
+- restauração de dados;
+- limpeza dos dados operacionais.
+
+Isso mantém a identidade visual do sistema consistente.
 
 ---
 
 # Banco de dados
 
-Arquivo de instalação:
+Arquivo:
 
 ```text
 database/CriarBanco.sql
 ```
 
-Banco:
+Banco criado:
 
 ```text
 velas_s_tome
@@ -521,6 +707,24 @@ atividades
 configuracoes_empresa
 ```
 
+## Relacionamentos
+
+O banco utiliza chaves estrangeiras para manter integridade entre as entidades.
+
+Exemplos:
+
+```text
+Usuários
+   ↓
+Atividades
+```
+
+```text
+Pedidos
+   ↓
+Itens do Pedido
+```
+
 ## Views
 
 ```text
@@ -528,18 +732,25 @@ vw_dashboard_resumo
 vw_controle_geral_resumo
 ```
 
+As views auxiliam na consulta resumida dos dados administrativos.
+
 ## Triggers
 
-O banco utiliza triggers para:
+O banco utiliza triggers para automatizar regras do ERP.
 
-- recalcular o valor total do Pedido;
-- recalcular o peso total do Pedido;
-- criar/atualizar a movimentação proveniente de Vendas;
-- criar/atualizar a movimentação vinculada a Pedidos.
+Entre elas:
+
+- recalcular valor total do Pedido;
+- recalcular peso total do Pedido;
+- criar movimentação financeira proveniente de Venda;
+- atualizar movimentação de Venda;
+- criar/atualizar movimentação vinculada a Pedido.
+
+Esse comportamento reduz a dependência de cálculos manuais e mantém módulos integrados.
 
 ## Banco inicial vazio
 
-O SQL não insere dados durante a instalação.
+A instalação não cria registros de negócio.
 
 Depois da importação:
 
@@ -553,62 +764,55 @@ Movimentações:  0
 Atividades:     0
 ```
 
-Os `INSERT` que aparecem dentro de triggers representam regras executadas apenas após o uso do sistema.
+Os comandos `INSERT` existentes dentro de triggers são regras do sistema e somente são executados conforme a aplicação é utilizada.
 
 ---
 
-# Sincronização front-end / MySQL
+# Sincronização entre Front-end e MySQL
 
-O front-end foi criado inicialmente utilizando armazenamento no navegador.
+O front-end do projeto foi desenvolvido inicialmente utilizando armazenamento no navegador.
 
-Posteriormente foi integrada a persistência MySQL sem reconstruir todas as páginas.
-
-A ponte principal é:
+A integração com MySQL foi adicionada posteriormente através de:
 
 ```text
 assets/js/backend-sync.js
 ```
 
-Fluxo simplificado:
+Fluxo:
 
 ```text
-Página abre
-   ↓
+Página administrativa
+        ↓
 backend-sync.js
-   ↓
+        ↓
 backend/api/sync.php
-   ↓
+        ↓
 MySQL
-   ↓
-estado do navegador
-   ↓
-JavaScript específico da página
+        ↓
+Estado utilizado pelo JavaScript
+        ↓
+Interface
 ```
 
 O sincronizador:
 
-1. carrega os dados do MySQL;
-2. hidrata as estruturas utilizadas pelo front-end;
-3. acompanha alterações nas chaves de armazenamento;
-4. envia os dados atualizados para o PHP.
+1. consulta os dados persistidos;
+2. hidrata as estruturas utilizadas pelo front;
+3. observa alterações;
+4. envia atualizações ao PHP;
+5. mantém os dados sincronizados com o MySQL.
 
-As colunas:
+As colunas `front_id` são utilizadas para manter a identidade dos registros entre navegador e banco.
 
-```text
-front_id
-```
-
-mantêm a identidade dos registros entre navegador e banco.
-
-Algumas chaves internas ainda possuem a palavra `Temporario` por compatibilidade histórica. Isso não significa que os registros sejam temporários: os dados atuais são persistidos no MySQL.
+Algumas chaves internas ainda contêm a palavra `Temporario` por compatibilidade com versões anteriores do front-end. Os registros, porém, são persistidos no MySQL.
 
 ---
 
 # Back-end
 
-## API utilizada atualmente
+## API principal
 
-O front principal utiliza:
+O front atual utiliza principalmente:
 
 ```text
 backend/api/
@@ -620,13 +824,26 @@ backend/api/
 
 Responsabilidades:
 
-- autenticação;
-- sessão;
-- alteração de senha;
-- sincronização;
-- manutenção/limpeza/restauração de dados.
+### `auth.php`
 
-## Endpoints modulares
+- cadastro;
+- login;
+- logout;
+- sessão;
+- alteração de senha.
+
+### `sync.php`
+
+- leitura dos dados do ERP;
+- persistência das coleções;
+- sincronização com o front-end.
+
+### `maintenance.php`
+
+- restauração de dados de demonstração;
+- limpeza de dados operacionais.
+
+## API modular
 
 Também existe:
 
@@ -634,7 +851,7 @@ Também existe:
 backend/modules/
 ```
 
-com endpoints separados para:
+com endpoints independentes para:
 
 - autenticação;
 - clientes;
@@ -647,72 +864,90 @@ com endpoints separados para:
 - atividades;
 - diagnóstico.
 
-Esses endpoints foram desenvolvidos em outra etapa e permanecem disponíveis para uma futura migração para CRUD direto por API.
-
-O fluxo atual do front utiliza principalmente `backend/api/`.
+Essa estrutura permanece disponível para uma futura evolução do sistema para operações CRUD individuais diretamente pela API.
 
 ---
 
 # Segurança
 
-O objetivo atual é executar o projeto localmente em uma única máquina. Por isso, as medidas de segurança foram mantidas proporcionais ao cenário, sem adicionar infraestrutura desnecessária.
+O projeto foi pensado para execução local em ambiente controlado. Mesmo assim, foram aplicadas medidas básicas de segurança.
 
 A versão atual possui:
 
-- senhas armazenadas com `password_hash()`;
-- verificação com `password_verify()`;
+- `password_hash()`;
+- `password_verify()`;
+- `password_needs_rehash()`;
 - senha mínima de 8 caracteres para novos cadastros e alterações;
 - PDO;
 - prepared statements;
 - `PDO::ATTR_EMULATE_PREPARES = false`;
-- cookies de sessão `HttpOnly`;
+- sessões PHP;
+- cookie de sessão próprio;
+- `HttpOnly`;
 - `SameSite=Lax`;
 - `session.use_strict_mode`;
 - `session.use_only_cookies`;
-- regeneração do ID de sessão após autenticação;
-- regeneração da sessão após alteração de senha;
-- expiração da sessão depois de 2 horas sem atividade;
-- limite de 5 tentativas de login dentro de uma janela de 60 segundos;
-- atualização automática do hash de senha quando necessário com `password_needs_rehash()`;
-- bloqueio de requisições de escrita com `Origin` incompatível;
-- header `X-Content-Type-Options: nosniff`;
-- header `X-Frame-Options: DENY`;
+- regeneração do ID da sessão após login;
+- regeneração após alteração de senha;
+- timeout por inatividade;
+- limitação de tentativas consecutivas de login;
+- verificação de origem para requisições de escrita;
+- `X-Content-Type-Options: nosniff`;
+- `X-Frame-Options: DENY`;
 - `Referrer-Policy: no-referrer`;
-- `Permissions-Policy` restritiva para câmera, microfone e geolocalização;
-- detalhes internos de erro ocultos por padrão;
-- confirmação visual antes de ações destrutivas.
+- `Permissions-Policy` restritiva;
+- detalhes internos de erro ocultados;
+- confirmação antes de operações destrutivas.
 
-## Escopo das proteções
+### Limite de tentativas
 
-O sistema foi pensado para:
+Atualmente:
 
 ```text
-XAMPP local
-uma máquina
-ambiente controlado
-poucos usuários
+5 tentativas incorretas
+em uma janela de 60 segundos
 ```
 
-Caso seja hospedado na internet no futuro, ainda será recomendado implementar:
+podem causar bloqueio temporário de novas tentativas.
 
-- cargos e permissões;
-- cadastro de usuários restrito;
-- HTTPS obrigatório;
-- CSRF token explícito;
-- rate limiting persistente;
-- recuperação segura de conta;
-- auditoria detalhada;
-- sincronização preparada para vários usuários simultâneos.
+### Tempo de sessão
+
+Após aproximadamente:
+
+```text
+2 horas sem atividade
+```
+
+a sessão pode expirar.
 
 ---
 
 # Modelo de usuários
 
-As contas representam usuários trabalhando na **mesma empresa**.
+O sistema representa uma única empresa.
 
-Clientes, produtos, vendas, pedidos, Controle Geral e configurações da empresa são compartilhados entre as contas autenticadas.
+As contas cadastradas são usuários internos que trabalham sobre a mesma base empresarial.
+
+Portanto:
+
+```text
+Usuário A ─┐
+Usuário B ─┼──► Mesma empresa
+Usuário C ─┘
+```
+
+Eles compartilham:
+
+- clientes;
+- produtos;
+- vendas;
+- pedidos;
+- Controle Geral;
+- configurações da empresa.
 
 O sistema não cria uma empresa ou banco separado para cada usuário.
+
+Esse modelo é adequado ao objetivo de um ERP interno utilizado pela equipe de uma pequena empresa.
 
 ---
 
@@ -796,28 +1031,35 @@ tcc/
 
 ---
 
-# Arquivos importantes
+# Arquivos principais
 
-| Arquivo | Função |
+| Arquivo | Responsabilidade |
 |---|---|
-| `index.html` | Tela de login |
+| `index.html` | Login |
 | `cadastro.html` | Criação de conta |
-| `assets/js/auth.js` | Lógica de autenticação no front |
-| `assets/js/backend-sync.js` | Ponte entre front-end e MySQL |
-| `assets/js/common.js` | Componentes e utilidades compartilhadas |
-| `backend/api/auth.php` | Autenticação principal |
-| `backend/api/sync.php` | Sincronização dos dados |
-| `backend/api/maintenance.php` | Limpeza e restauração |
-| `backend/config/conexao.php` | Conexão PDO utilizada pela API principal |
-| `database/CriarBanco.sql` | Criação limpa do banco |
+| `pages/home.html` | Dashboard |
+| `pages/clientes.html` | Gestão de clientes |
+| `pages/produtos.html` | Gestão de produtos |
+| `pages/vendas.html` | Registro de vendas |
+| `pages/pedidos.html` | Gestão de pedidos |
+| `pages/financeiro.html` | Controle Geral |
+| `pages/configuracoes.html` | Configurações |
+| `assets/js/auth.js` | Autenticação no front-end |
+| `assets/js/backend-sync.js` | Sincronização front/MySQL |
+| `assets/js/common.js` | Componentes e funções compartilhadas |
+| `backend/api/auth.php` | Autenticação no servidor |
+| `backend/api/sync.php` | Sincronização |
+| `backend/api/maintenance.php` | Manutenção dos dados |
+| `backend/config/conexao.php` | Conexão PDO |
+| `database/CriarBanco.sql` | Estrutura limpa do banco |
 | `backend/modules/diagnostico.php` | Diagnóstico do ambiente |
-| `docs/TCC estrutura..docx` | Documento acadêmico mantido separadamente |
+| `docs/TCC estrutura..docx` | Documento acadêmico separado do código |
 
 ---
 
-# Conexão MySQL
+# Configuração padrão do MySQL
 
-Por padrão, a API principal utiliza as configurações típicas do XAMPP:
+A API principal está preparada para o padrão do XAMPP:
 
 ```text
 Host:     127.0.0.1
@@ -827,13 +1069,19 @@ Usuário:  root
 Senha:    vazia
 ```
 
-`backend/config/conexao.php` também permite sobrescrever essas credenciais através de variáveis de ambiente.
+O arquivo:
+
+```text
+backend/config/conexao.php
+```
+
+também permite sobrescrever as credenciais através de variáveis de ambiente.
 
 ---
 
 # Diagnóstico
 
-Depois de importar o SQL, abra:
+Depois da instalação, é possível verificar o ambiente em:
 
 ```text
 http://localhost/tcc/backend/modules/diagnostico.php
@@ -843,35 +1091,74 @@ O diagnóstico verifica:
 
 - versão do PHP;
 - extensão PDO MySQL;
-- conexão com MySQL;
+- conexão com banco;
 - tabelas;
 - views;
 - triggers;
-- colunas `front_id` necessárias para a sincronização.
+- colunas `front_id`.
+
+---
+
+# Escopo atual do ERP
+
+O projeto implementa módulos adequados ao contexto atual da Velas S. Tomé.
+
+Atualmente estão incluídos:
+
+```text
+Autenticação
+Dashboard
+Clientes
+Produtos
+Vendas
+Pedidos
+Controle financeiro
+Controle de peso
+Configurações
+Atividades
+```
+
+Não fazem parte do escopo atual módulos tradicionais de ERPs maiores, como:
+
+```text
+Recursos Humanos
+Folha de pagamento
+Fiscal
+Contabilidade completa
+Compras
+Fornecedores
+Estoque avançado
+Logística
+```
+
+A ausência desses módulos não impede a classificação do projeto como ERP de pequeno porte, pois o sistema foi desenvolvido com escopo direcionado às necessidades administrativas da empresa.
 
 ---
 
 # Limitações conhecidas
 
-## Uso concorrente
+## Uso simultâneo
 
-A sincronização atual trabalha com coleções completas.
+A sincronização atual trabalha principalmente com coleções completas.
 
-Isso é adequado para o cenário principal do projeto:
+Ela é adequada ao cenário principal:
 
 ```text
 uso local
 uma máquina
+poucos usuários
 baixa concorrência
 ```
 
-Caso vários computadores alterem os mesmos registros simultaneamente, pode ocorrer conflito do tipo **última gravação vence**.
+Em um cenário com várias máquinas realizando alterações simultaneamente, pode ocorrer conflito de última gravação.
 
-Para uma futura versão multiusuário em rede, o recomendado é migrar o front progressivamente para os endpoints CRUD individuais de `backend/modules/`.
+Uma evolução futura pode migrar progressivamente o front para operações CRUD individuais através de `backend/modules/`.
 
 ## Permissões
 
-Atualmente não existem cargos como:
+Atualmente todos os usuários autenticados possuem acesso às funções disponíveis no ERP.
+
+Não existem cargos como:
 
 ```text
 Administrador
@@ -879,13 +1166,13 @@ Gerente
 Operador
 ```
 
-Todos os usuários autenticados trabalham com os mesmos dados e possuem acesso às funções exibidas na interface.
+Para uso local isso atende ao escopo atual.
 
-Para o cenário local atual isso é aceitável. Em uma implantação pública, seria necessário adicionar controle de permissões.
+Em uma implantação maior, seria recomendado implementar níveis de permissão.
 
 ## Recuperação de senha
 
-Não existe fluxo automático de recuperação porque a autenticação atual não possui e-mail ou telefone dedicado à recuperação da conta.
+Não existe recuperação automática de conta porque a autenticação atual não possui e-mail ou telefone dedicado à recuperação.
 
 ---
 
@@ -897,11 +1184,16 @@ A autenticação utiliza:
 assets/img/wall.gif
 ```
 
-O GIF é relativamente grande.
+O GIF possui alta qualidade e é adequado ao uso local.
 
-Em execução local isso tende a ter pouco impacto prático.
+Por ser um arquivo relativamente grande, em uma futura hospedagem web pode ser convertido para:
 
-Se o projeto for hospedado futuramente, é recomendável converter o fundo para **WebM ou MP4**, mantendo a animação com tamanho de arquivo menor.
+```text
+WebM
+MP4
+```
+
+mantendo a animação com menor tamanho de transferência.
 
 ---
 
@@ -913,15 +1205,41 @@ O arquivo:
 docs/TCC estrutura..docx
 ```
 
-é mantido separadamente do código-fonte e não é alterado automaticamente junto com o sistema.
+é mantido separado do código da aplicação.
+
+Alterações no sistema não modificam automaticamente esse documento.
+
+---
+
+# Possíveis evoluções
+
+O ERP pode ser ampliado futuramente com:
+
+- fornecedores;
+- compras;
+- estoque;
+- matérias-primas;
+- produção;
+- relatórios;
+- gráficos avançados;
+- níveis de acesso;
+- backup e restauração;
+- exportação de relatórios;
+- integração fiscal;
+- implantação em rede;
+- hospedagem;
+- acesso por múltiplas máquinas;
+- API CRUD direta em todos os módulos.
 
 ---
 
 # Status
 
-**Projeto funcional em ambiente local / desenvolvimento avançado.**
+**ERP de pequeno porte funcional em ambiente local.**
 
-Os principais módulos já estão integrados ao MySQL e podem ser utilizados pelo XAMPP.
+A versão atual possui front-end, PHP e MySQL integrados e está preparada para execução com XAMPP.
+
+Os principais fluxos administrativos estão conectados a uma única base de dados, permitindo que informações de diferentes módulos sejam compartilhadas e utilizadas de forma integrada.
 
 ---
 
