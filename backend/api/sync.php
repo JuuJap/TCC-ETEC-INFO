@@ -62,7 +62,7 @@ function loadSales(PDO $pdo): array
 function loadOrders(PDO $pdo): array
 {
     $orders = $pdo->query('SELECT id_pedido, front_id, numero_pedido, cliente_nome, endereco_entrega, data_pedido, valor_total, peso_total, criado_em, atualizado_em FROM pedidos ORDER BY numero_pedido DESC')->fetchAll();
-    $itemStmt = $pdo->prepare('SELECT id_item_pedido, front_id, descricao, quantidade, valor_unitario, peso_unitario FROM itens_pedido WHERE id_pedido = ? ORDER BY id_item_pedido ASC');
+    $itemStmt = $pdo->prepare('SELECT ip.id_item_pedido, ip.front_id, ip.id_produto, ip.descricao, ip.quantidade, ip.valor_unitario, ip.peso_unitario, p.front_id AS produto_front_id, p.tipo, p.cor, p.caracteristica FROM itens_pedido ip LEFT JOIN produtos p ON p.id_produto = ip.id_produto WHERE ip.id_pedido = ? ORDER BY ip.id_item_pedido ASC');
 
     $result = [];
     foreach ($orders as $order) {
@@ -74,7 +74,11 @@ function loadOrders(PDO $pdo): array
             $unitWeight = (float)$item['peso_unitario'];
             $items[] = [
                 'id' => $item['front_id'] ?: 'item-db-' . $item['id_item_pedido'],
+                'productId' => $item['produto_front_id'] ?? null,
                 'description' => $item['descricao'],
+                'type' => $item['tipo'] ?? '',
+                'color' => $item['cor'] ?? '',
+                'characteristic' => $item['caracteristica'] ?? '',
                 'quantity' => $quantity,
                 'unitValue' => $unitValue,
                 'unitWeight' => $unitWeight,

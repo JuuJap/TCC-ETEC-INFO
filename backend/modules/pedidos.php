@@ -12,7 +12,7 @@ function buscarPedido(PDO $pdo, int $id): ?array
     $pedido = $stmt->fetch();
     if (!$pedido) return null;
 
-    $itensStmt = $pdo->prepare('SELECT * FROM itens_pedido WHERE id_pedido=:id ORDER BY id_item_pedido');
+    $itensStmt = $pdo->prepare('SELECT ip.*, p.tipo, p.cor, p.caracteristica, p.front_id AS produto_front_id FROM itens_pedido ip LEFT JOIN produtos p ON p.id_produto = ip.id_produto WHERE ip.id_pedido=:id ORDER BY ip.id_item_pedido');
     $itensStmt->execute([':id' => $id]);
     $itens = [];
 
@@ -22,8 +22,11 @@ function buscarPedido(PDO $pdo, int $id): ?array
         $peso = (float) $r['peso_unitario'];
         $itens[] = [
             'id' => (string) $r['id_item_pedido'],
-            'productId' => $r['id_produto'] !== null ? (string) $r['id_produto'] : null,
+            'productId' => $r['produto_front_id'] ?? ($r['id_produto'] !== null ? (string) $r['id_produto'] : null),
             'description' => (string) $r['descricao'],
+            'type' => (string) ($r['tipo'] ?? ''),
+            'color' => (string) ($r['cor'] ?? ''),
+            'characteristic' => (string) ($r['caracteristica'] ?? ''),
             'quantity' => $quantidade,
             'unitValue' => $valor,
             'unitWeight' => $peso,
