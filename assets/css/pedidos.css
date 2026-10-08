@@ -533,12 +533,25 @@
     }
 }
 
+/* Impressão A4: tabela compacta para aproximadamente 20–30 itens por página.
+   Características e Peso permanecem no sistema e na prévia, mas não saem no papel. */
 @page {
-    size: A4;
-    margin: 15mm;
+    size: A4 portrait;
+    margin: 8mm;
 }
 
 @media print {
+    html,
+    body {
+        background: #fff !important;
+    }
+
+    .ticket-panel {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
     body * {
         visibility: hidden !important;
     }
@@ -549,64 +562,189 @@
     }
 
     .order-ticket {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        max-width: none;
-        margin: 0;
-        border: 1px solid #777;
-        border-radius: 0;
-        box-shadow: none;
-    }
-
-    .ticket-table-wrapper {
-        overflow: visible;
-    }
-
-    .ticket-table {
-        font-size: 10pt;
-    }
-
-    .ticket-header,
-    .ticket-summary {
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        border: 1px solid #999 !important;
+        border-radius: 0 !important;
+        background: #fff !important;
+        box-shadow: none !important;
+        color: #222 !important;
     }
 
     .ticket-header {
+        display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
         justify-content: space-between !important;
+        padding: 5mm 5mm 3mm !important;
+        min-height: 0 !important;
+        gap: 4mm !important;
+        background: #fff !important;
+        border-bottom: 1px solid #666 !important;
+    }
+
+    .ticket-brand {
+        min-width: 0 !important;
+        gap: 2.5mm !important;
+    }
+
+    .ticket-brand img {
+        width: 10mm !important;
+        height: 10mm !important;
+    }
+
+    .ticket-brand strong {
+        font-size: 12pt !important;
+        letter-spacing: 0 !important;
+        line-height: 1.1 !important;
+        color: #222 !important;
+    }
+
+    .ticket-brand span {
+        font-size: 8pt !important;
+        line-height: 1.1 !important;
+        color: #555 !important;
+    }
+
+    .ticket-company-meta {
+        max-width: none !important;
+        margin-top: 1mm !important;
+        font-size: 6.5pt !important;
+        line-height: 1.1 !important;
+        color: #555 !important;
     }
 
     .ticket-number {
+        flex-shrink: 0 !important;
         align-items: flex-end !important;
-        margin-left: auto;
+        margin-left: auto !important;
+        gap: 0.5mm !important;
+    }
+
+    .ticket-number span {
+        font-size: 7pt !important;
+        color: #555 !important;
     }
 
     .ticket-number strong {
-        font-size: 14pt;
+        font-size: 10pt !important;
+        line-height: 1.1 !important;
+        color: #222 !important;
     }
 
     .ticket-client-data {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.2mm !important;
+        padding: 3mm 5mm !important;
+        border-bottom: 1px solid #999 !important;
     }
 
-    .ticket-client-data p:first-child {
-        grid-column: 1 / -1;
-        font-size: 12pt;
+    .ticket-client-data p,
+    .ticket-client-data p:first-child,
+    .ticket-client-data p:nth-child(2) {
+        grid-column: 1 / -1 !important;
+        margin: 0 !important;
+        font-size: 8.5pt !important;
+        line-height: 1.15 !important;
+        color: #222 !important;
     }
 
     .ticket-client-data p:first-child #ticketClient {
-        font-size: 16pt;
+        font-size: 12pt !important;
+        line-height: 1.2 !important;
+        color: #222 !important;
+        font-weight: 800 !important;
     }
 
-    .ticket-client-data p:nth-child(2) {
-        grid-column: 1 / -1 !important;
+    .ticket-table-wrapper {
+        overflow: visible !important;
+    }
+
+    .ticket-table {
+        table-layout: fixed !important;
+        width: 100% !important;
+        border-collapse: collapse !important;
+        font-size: 8pt !important;
+        line-height: 1.13 !important;
+        color: #222 !important;
+    }
+
+    .ticket-table thead {
+        display: table-header-group !important;
+    }
+
+    .ticket-table th,
+    .ticket-table td {
+        box-sizing: border-box !important;
+        padding: 1.2mm 1mm !important;
+        overflow-wrap: anywhere !important;
+        vertical-align: top !important;
+        border: 1px solid #bbb !important;
+        color: #222 !important;
+        background: #fff !important;
+    }
+
+    .ticket-table th {
+        font-size: 7.5pt !important;
+        font-weight: bold !important;
+        background: #eee !important;
+    }
+
+    .ticket-table tbody tr {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* Depois de ocultar as colunas, as seis restantes recebem espaço útil. */
+    .ticket-table th:nth-child(1) { width: 7% !important; }
+    .ticket-table th:nth-child(2) { width: 16% !important; }
+    .ticket-table th:nth-child(3) { width: 12% !important; }
+    .ticket-table th:nth-child(4) { width: 34% !important; }
+    .ticket-table th:nth-child(6) { width: 15% !important; }
+    .ticket-table th:nth-child(7) { width: 16% !important; }
+
+    .ticket-print-hidden,
+    .ticket-table .ticket-print-hidden {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .ticket-summary {
+        display: flex !important;
+        justify-content: flex-end !important;
+        padding: 3mm 5mm !important;
+        gap: 0 !important;
+        background: #fff !important;
+        border-top: 1px solid #777 !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .ticket-summary span {
+        font-size: 8pt !important;
+        color: #555 !important;
+    }
+
+    .ticket-summary strong {
+        font-size: 13pt !important;
+        color: #222 !important;
+    }
+
+    .ticket-header,
+    .ticket-client-data,
+    .ticket-table th {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
 }
-
 
 .ticket-company-meta {
     display: block;

@@ -211,6 +211,31 @@ function fillProductDataFromSelection() {
     renderItemCalculation();
 }
 
+// Metadados do produto usados no talão (Tipo / Cor).
+// Pedidos antigos podem não ter esses campos; nesse caso consultamos o cadastro.
+function findProductForOrderItem(item) {
+    const products = readSessionArray(PRODUCTS_KEY);
+    const productId = String(item.productId || "");
+    if (productId) {
+        const byId = products.find(product => String(product?.id || "") === productId);
+        if (byId) return byId;
+    }
+
+    const description = normalizeText(item.description || "");
+    return description
+        ? products.find(product => normalizeText(product?.name || "") === description) || null
+        : null;
+}
+
+function getItemDisplayDetails(item) {
+    const product = findProductForOrderItem(item);
+    return {
+        type: String(item.type || product?.type || "").trim() || "—",
+        color: String(item.color || product?.color || "").trim() || "—",
+        characteristic: String(item.characteristic || product?.characteristic || "").trim() || "—"
+    };
+}
+
 // ITEM / CÁLCULOS
 
 function configureItemForm() {
@@ -266,9 +291,17 @@ function handleItemSubmit(event) {
         return;
     }
 
+    const matchingProduct = findProductForOrderItem({ description });
+    const previousItem = editingItemIndex !== null ? draftItems[editingItemIndex] : null;
+    const sameDescription = previousItem &&
+        normalizeText(previousItem.description) === normalizeText(description);
     const item = {
         id: createId("item"),
+        productId: matchingProduct?.id || (sameDescription ? previousItem.productId : null) || null,
         description,
+        type: matchingProduct?.type || (sameDescription ? previousItem.type : "") || "",
+        color: matchingProduct?.color || (sameDescription ? previousItem.color : "") || "",
+        characteristic: matchingProduct?.characteristic || (sameDescription ? previousItem.characteristic : "") || "",
         quantity,
         unitValue,
         unitWeight,
@@ -350,9 +383,13 @@ function renderDraftItems() {
 
     draftItems.forEach((item, index) => {
         const row = document.createElement("tr");
+        const details = getItemDisplayDetails(item);
         row.innerHTML = `
             <td>${item.quantity}</td>
+            <td>${escapeHtml(details.type)}</td>
+            <td>${escapeHtml(details.color)}</td>
             <td class="order-item-description">${escapeHtml(item.description)}</td>
+            <td>${escapeHtml(details.characteristic)}</td>
             <td class="order-value">${formatCurrency(item.unitValue)}</td>
             <td class="order-value">${formatCurrency(item.totalValue)}</td>
             <td class="order-weight">${formatWeight(item.totalWeight)}</td>
@@ -449,16 +486,20 @@ function renderTicket() {
     body.innerHTML = "";
 
     if (!draftItems.length) {
-        body.innerHTML = '<tr class="ticket-empty-row"><td colspan="5">Nenhum item adicionado.</td></tr>';
+        body.innerHTML = '<tr class="ticket-empty-row"><td colspan="8">Nenhum item adicionado.</td></tr>';
     } else {
         draftItems.forEach(item => {
             const row = document.createElement("tr");
+            const details = getItemDisplayDetails(item);
             row.innerHTML = `
                 <td>${item.quantity}</td>
+                <td>${escapeHtml(details.type)}</td>
+                <td>${escapeHtml(details.color)}</td>
                 <td>${escapeHtml(item.description)}</td>
+                <td class="ticket-print-hidden">${escapeHtml(details.characteristic)}</td>
                 <td>${formatCurrency(item.unitValue)}</td>
                 <td>${formatCurrency(item.totalValue)}</td>
-                <td>${formatWeight(item.totalWeight)}</td>
+                <td class="ticket-print-hidden">${formatWeight(item.totalWeight)}</td>
             `;
             body.appendChild(row);
         });
