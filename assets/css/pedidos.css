@@ -537,9 +537,150 @@
     }
 }
 
+
+/* Prévia do talão: mesmas informações e proporções da folha impressa.
+   Campos de peso, cor e características continuam armazenados no sistema. */
+@media screen {
+    .order-ticket {
+        background: #fff;
+        color: #252525;
+        border: 1px solid #b9b9b9;
+        border-radius: 10px;
+        box-shadow: 0 9px 24px rgba(58, 38, 29, 0.055);
+        font-family: Georgia, "Times New Roman", serif;
+    }
+    .order-ticket .ticket-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 16px;
+        border-bottom: 1px solid #999;
+        background: #fff;
+    }
+    .order-ticket .ticket-brand {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+    }
+    .order-ticket .ticket-brand .ticket-logo-print {
+        display: block;
+        width: 88px;
+        height: 88px;
+        max-width: none;
+        flex: 0 0 88px;
+        object-fit: contain;
+    }
+    .order-ticket .ticket-brand strong {
+        font-size: 20px;
+        letter-spacing: 0;
+        color: #262626;
+        line-height: 1.12;
+    }
+    .order-ticket .ticket-brand span {
+        font-size: 12px;
+        color: #555;
+    }
+    .order-ticket .ticket-company-meta {
+        font-size: 10px;
+        line-height: 1.25;
+        color: #666;
+    }
+    .order-ticket .ticket-number { gap: 3px; }
+    .order-ticket .ticket-number span { font-size: 10px; color: #555; }
+    .order-ticket .ticket-number strong { font-size: 17px; color: #222; }
+    .order-ticket .ticket-client-data {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 13px 16px;
+        border-bottom: 1px solid #aaa;
+    }
+    .order-ticket .ticket-client-data p,
+    .order-ticket .ticket-client-data p:nth-child(2) {
+        margin: 0;
+        color: #353535;
+        font-size: 12px;
+        line-height: 1.2;
+    }
+    .order-ticket .ticket-client-data p:first-child { font-size: 13px; }
+    .order-ticket .ticket-client-data #ticketClient {
+        font-size: 18px;
+        font-weight: 700;
+        color: #222;
+        line-height: 1.15;
+    }
+    .order-ticket .ticket-client-data strong { color: #222; }
+    .order-ticket .ticket-table-wrapper { overflow-x: auto; }
+    .order-ticket .ticket-table {
+        table-layout: fixed;
+        min-width: 640px;
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        line-height: 1.2;
+        color: #242424;
+    }
+    .order-ticket .ticket-table th,
+    .order-ticket .ticket-table td {
+        box-sizing: border-box;
+        padding: 6px 6px;
+        text-align: left;
+        border: 1px solid #c7c7c7;
+        color: #242424;
+        background: #fff;
+        vertical-align: top;
+    }
+    .order-ticket .ticket-table th {
+        font-weight: 700;
+        background: #eee;
+        white-space: nowrap;
+    }
+    .order-ticket .ticket-table th:nth-child(1),
+    .order-ticket .ticket-table td:nth-child(1) { width: 5%; }
+    .order-ticket .ticket-table th:nth-child(2),
+    .order-ticket .ticket-table td:nth-child(2) { width: 11%; }
+    .order-ticket .ticket-table th:nth-child(3),
+    .order-ticket .ticket-table td:nth-child(3) { width: 59%; overflow-wrap: anywhere; }
+    .order-ticket .ticket-table th:nth-child(4),
+    .order-ticket .ticket-table td:nth-child(4) { width: 12%; }
+    .order-ticket .ticket-table th:nth-child(5),
+    .order-ticket .ticket-table td:nth-child(5) { width: 13%; }
+    .order-ticket .ticket-table td:not(:nth-child(3)) {
+        white-space: nowrap;
+    }
+    .order-ticket .ticket-empty-row td {
+        white-space: normal;
+        padding: 20px 8px;
+        text-align: center;
+        color: #777;
+    }
+    .order-ticket .ticket-summary {
+        padding: 12px 16px;
+        background: #fff;
+        border-top: 1px solid #aaa;
+        gap: 0;
+    }
+    .order-ticket .ticket-summary span { font-size: 11px; color: #555; }
+    .order-ticket .ticket-summary strong { font-size: 19px; color: #222; }
+}
+@media screen and (max-width: 600px) {
+    .order-ticket .ticket-header { padding: 10px 12px; gap: 6px; }
+    .order-ticket .ticket-brand { gap: 7px; }
+    .order-ticket .ticket-brand .ticket-logo-print {
+        width: 58px;
+        height: 58px;
+        flex-basis: 58px;
+    }
+    .order-ticket .ticket-brand strong { font-size: 16px; }
+    .order-ticket .ticket-client-data { padding: 10px 12px; }
+}
+
 /* Impressão baseada no modelo aprovado de talão simples e compacto.
-   As colunas Cor, Características e Peso continuam no sistema e são ocultadas
-   apenas na impressão. A logo colorida usa um recorte sem bordas transparentes. */
+   As colunas Cor, Características e Peso continuam nos dados internos,
+   mas não aparecem na prévia nem na folha impressa. A logo colorida usa um recorte sem bordas transparentes. */
 @page {
     size: A4 portrait;
     margin: 8mm;
@@ -675,10 +816,11 @@
     .ticket-table-wrapper { overflow: visible !important; }
     .ticket-table {
         width: 100% !important;
+        min-width: 0 !important;
         table-layout: fixed !important;
         border-collapse: collapse !important;
-        font-size: 7.7pt !important;
-        line-height: 1.09 !important;
+        font-size: 10pt !important;
+        line-height: 1.16 !important;
         color: #222 !important;
     }
     .ticket-table thead { display: table-header-group !important; }
@@ -692,27 +834,43 @@
         background: #fff !important;
     }
     .ticket-table th {
-        font-size: 7.3pt !important;
+        font-size: 9.2pt !important;
         font-weight: 700 !important;
         white-space: nowrap !important;
         background: #eee !important;
     }
+    /* Linha de cada produto: pelo menos 1 centimetro de altura no A4. */
     .ticket-table tbody tr {
+        height: 10mm !important;
         break-inside: avoid !important;
         page-break-inside: avoid !important;
     }
+    .ticket-table tbody td {
+        height: 10mm !important;
+        vertical-align: middle !important;
+        padding: 1mm 0.6mm !important;
+        font-size: 10pt !important;
+        line-height: 1.16 !important;
+    }
     .ticket-table th:nth-child(1), .ticket-table td:nth-child(1) { width: 5% !important; }
     .ticket-table th:nth-child(2), .ticket-table td:nth-child(2) { width: 11% !important; }
-    .ticket-table th:nth-child(4), .ticket-table td:nth-child(4) { width: 59% !important; }
-    .ticket-table th:nth-child(6), .ticket-table td:nth-child(6) { width: 12% !important; }
-    .ticket-table th:nth-child(7), .ticket-table td:nth-child(7) { width: 13% !important; }
-    .ticket-table th:nth-child(4), .ticket-table td:nth-child(4) {
+    .ticket-table th:nth-child(3), .ticket-table td:nth-child(3) { width: 59% !important; }
+    .ticket-table th:nth-child(4), .ticket-table td:nth-child(4) { width: 12% !important; }
+    .ticket-table th:nth-child(5), .ticket-table td:nth-child(5) { width: 13% !important; }
+    /* Centraliza os dados nas colunas; descricao permanece alinhada a esquerda. */
+    .ticket-table thead th,
+    .ticket-table tbody td {
+        text-align: center !important;
+        vertical-align: middle !important;
+    }
+    .ticket-table th:nth-child(3), .ticket-table td:nth-child(3) {
+        text-align: left !important;
         overflow-wrap: anywhere !important;
     }
     .ticket-table th:nth-child(1), .ticket-table td:nth-child(1),
     .ticket-table th:nth-child(2), .ticket-table td:nth-child(2),
-    .ticket-table th:nth-child(6), .ticket-table td:nth-child(6),
-    .ticket-table th:nth-child(7), .ticket-table td:nth-child(7) {
+    .ticket-table th:nth-child(4), .ticket-table td:nth-child(4),
+    .ticket-table th:nth-child(5), .ticket-table td:nth-child(5) {
         white-space: nowrap !important;
         overflow-wrap: normal !important;
         word-break: keep-all !important;
