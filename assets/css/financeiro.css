@@ -188,12 +188,12 @@
     background: rgba(180, 91, 70, 0.14);
 }
 
-body.dark-mode .finance-type-badge.income {
+html.dark-mode .finance-type-badge.income {
     color: #9bd6ac;
     background: rgba(105, 190, 129, 0.14);
 }
 
-body.dark-mode .finance-type-badge.expense {
+html.dark-mode .finance-type-badge.expense {
     color: #e1a292;
     background: rgba(202, 112, 91, 0.14);
 }
@@ -206,11 +206,11 @@ body.dark-mode .finance-type-badge.expense {
     color: #a85442;
 }
 
-body.dark-mode .finance-value.income {
+html.dark-mode .finance-value.income {
     color: #9bd6ac;
 }
 
-body.dark-mode .finance-value.expense {
+html.dark-mode .finance-value.expense {
     color: #e1a292;
 }
 
@@ -430,11 +430,11 @@ body.dark-mode .finance-value.expense {
     color: #a85442;
 }
 
-body.dark-mode .finance-weight.income {
+html.dark-mode .finance-weight.income {
     color: #9bd6ac;
 }
 
-body.dark-mode .finance-weight.expense {
+html.dark-mode .finance-weight.expense {
     color: #e1a292;
 }
 

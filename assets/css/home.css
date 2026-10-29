@@ -49,7 +49,7 @@
    TEMA ESCURO
 ========================================================= */
 
-body.dark-mode {
+html.dark-mode {
     --background: #171310;
     --surface: #241d19;
     --surface-soft: #2b231e;
@@ -95,6 +95,19 @@ body.dark-mode {
 
 html {
     scroll-behavior: smooth;
+    background-color: var(--background);
+    color-scheme: light;
+}
+
+html.dark-mode {
+    color-scheme: dark;
+}
+
+/* Bloqueia o fade das cores apenas no primeiro carregamento da pagina. */
+html.theme-preload *,
+html.theme-preload *::before,
+html.theme-preload *::after {
+    transition: none !important;
 }
 
 body {
@@ -111,9 +124,7 @@ body {
         Arial,
         sans-serif;
 
-    transition:
-        background-color var(--transition),
-        color var(--transition);
+    transition: none;
 }
 
 body.modal-open,
@@ -214,7 +225,7 @@ input:focus-visible {
     transition: filter var(--transition);
 }
 
-body:not(.dark-mode) .brand-logo {
+html:not(.dark-mode) .brand-logo {
     filter:
         contrast(1.15)
         saturate(1.12)
@@ -394,7 +405,7 @@ body:not(.dark-mode) .brand-logo {
     backdrop-filter: blur(14px);
 }
 
-body.dark-mode .topbar {
+html.dark-mode .topbar {
     background: rgba(23, 19, 16, 0.88);
 }
 
@@ -1622,24 +1633,24 @@ body.dark-mode .topbar {
     background: #eadfd8;
 }
 
-body.dark-mode {
+html.dark-mode {
     scrollbar-color: #765044 #1d1715;
 }
 
-body.dark-mode ::-webkit-scrollbar-track {
+html.dark-mode ::-webkit-scrollbar-track {
     background: #1d1715;
 }
 
-body.dark-mode ::-webkit-scrollbar-thumb {
+html.dark-mode ::-webkit-scrollbar-thumb {
     background: #765044;
     border: 1px solid #1d1715;
 }
 
-body.dark-mode ::-webkit-scrollbar-thumb:hover {
+html.dark-mode ::-webkit-scrollbar-thumb:hover {
     background: #9a6d59;
 }
 
-body.dark-mode ::-webkit-scrollbar-corner {
+html.dark-mode ::-webkit-scrollbar-corner {
     background: #1d1715;
 }
 
